@@ -4,7 +4,7 @@
 local host = '127.0.0.1' -- localhost
 local port = 7778 -- default port 7778
 local channelId = '1157208257396473956' -- enter channel ID here
-local token = 'NzExNjc5MzY4NDgwNTU1MDMw.XsGhDw.bPocuCbpWeoOrQd9i_0cRf5svzc' -- enter your token here
+local token = '' -- enter your token here
 --------------------------------------------------------------------------------
 
 local uv = require('uv')
