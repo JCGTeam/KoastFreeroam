@@ -3,7 +3,7 @@ newsRUS.txt
 newsENG.txt
 ads.txt
 autoreboot.bat
-dtojc.lua
-scripts/3-Tags/server/specialplayers.lua
 scripts/3-Tags/server/*.txt
 !scripts/3-Tags/server/readme.txt
+dtojc.lua
+scripts/3-Tags/server/specialplayers.lua
