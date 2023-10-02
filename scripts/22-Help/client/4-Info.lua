@@ -15,15 +15,15 @@ function HControls:EngHelp()
 			name = "Information",
 			text =
 			    "> Main:\n" ..
-                "    Group in VK              [empty_link]\n" ..
-                "    Group in Steam         [empty_link]\n" ..
-				"    We're in Discord           [empty_link]\n" ..
-				"    Telegram Channel        [empty_link]\n \n" ..
+                "    Group in VK              vk.com/rusjc\n" ..
+                "    Group in Steam         steamcommunity.com/groups/rusjc\n" ..
+				"    We're in Discord           https://cclx.win/NFXd0\n" ..
+				"    Telegram Channel        t.me/rusjc\n \n" ..
 				"> Our servers:\n" ..
 				"    Just Cause 2 Multiplayer Mod:\n" ..
-				"     - Koast Freeroam – [empty_link] (You are here)\n" ..
-				"     - Panau Crisis – [empty_link]\n" ..
-				"         - Group in VK - [empty_link]\n \n" ..
+				"     - Koast Freeroam – 62.122.214.141:7777 (You are here)\n" ..
+				"     - Panau Crisis – 62.122.214.141:6666\n" ..
+				"         - Group in VK - vk.com/jcsurv\n \n" ..
 				"> Developer:\n" ..
 				"     Hallkezz\n \n" ..
 				"> Help in development:\n" ..
@@ -63,15 +63,15 @@ function HControls:ModuleLoad()
 			name = "Информация",
 			text =
 			    "> Главное:\n" ..
-                "    Группа в VK               [empty_link]\n" ..
-                "    Группа в Steam         [empty_link]\n" ..
-				"    Сервер в Discord      [empty_link]\n" ..
-				"    Телеграм канал         [empty_link]\n \n" ..
+                "    Группа в VK               vk.com/rusjc\n" ..
+                "    Группа в Steam         steamcommunity.com/groups/rusjc\n" ..
+				"    Сервер в Discord      https://cclx.win/NFXd0\n" ..
+				"    Телеграм канал         t.me/rusjc\n \n" ..
 				"> Наши сервера:\n" ..
 				"    Just Cause 2 Multiplayer Mod:\n" ..
-				"     - Koast Freeroam – [empty_link] (Вы тут)\n" ..
-				"     - Panau Crisis – [empty_link]\n" ..
-				"         - Группа в VK - [empty_link]\n \n" ..
+				"     - Koast Freeroam – 62.122.214.141:7777 (Вы тут)\n" ..
+				"     - Panau Crisis – 62.122.214.141:6666\n" ..
+				"         - Группа в VK - vk.com/jcsurv\n \n" ..
 				"> Разработчик:\n" ..
 				"     Hallkezz\n \n" ..
 				"> Помощь в разработке:\n" ..

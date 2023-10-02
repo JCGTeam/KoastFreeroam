@@ -19,17 +19,17 @@ Events:Subscribe('ModuleLoad', function()
 	udp:send('handshake', host, port)
 
 	Events:Subscribe('ToDiscord', function(args)
-		local data = encode{"865977760576438282", args.text}
+		local data = encode{"1157208812051247164", args.text}
 		udp:send(data, host, port)
 	end)
 
 	Events:Subscribe('ToDiscordConsole', function(args)
-		local data = encode{"865978337712799754", args.text}
+		local data = encode{"1157208257396473956", args.text}
 		udp:send(data, host, port)
 	end)
 
 	Events:Subscribe('ToDiscordReports', function(args)
-		local data = encode{"975753707767611422", args.text}
+		local data = encode{"1157208651833024582", args.text}
 		udp:send(data, host, port)
 	end)
 

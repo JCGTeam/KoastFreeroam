@@ -13,10 +13,10 @@ end
 function WelcomeScreen:Open()
 	self.title = "Добро пожаловать на Koast Freeroam!"
 	self.text = "Мы рады, что вы зашли на наш проект, пожалуйста, прочитайте правила и FAQ перед началом игры.\n\n" ..
-	"> Наша группа в VK - [empty_link]\n" ..
-	"> Наша группа в Steam - [empty_link]\n" ..
-	"> Наш Discord сервер - [empty_link]\n" ..
-	"> Наш Telegram канал - [empty_link]\n\n" ..
+	"> Наша группа в VK - vk.com/rusjc\n" ..
+	"> Наша группа в Steam - steamcommunity.com/groups/rusjc\n" ..
+	"> Наш Discord сервер - https://cclx.win/NFXd0\n" ..
+	"> Наш Telegram канал - t.me/rusjc\n\n" ..
 	"Желаем вам приятной игры, наслаждайтесь :)"
 
 	if not self.RenderEvent then

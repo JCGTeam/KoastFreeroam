@@ -15,9 +15,9 @@ end
 
 function Messages:ModuleError( e )
 	Chat:Broadcast( self.err_prefix, Color.White, "Произошла критическая ошибка сервера, сообщите администрации!", Color.Red )
-	Chat:Broadcast( self.err_prefix, Color.White, "Discord: [empty_link]", Color.Red )
-	Chat:Broadcast( self.err_prefix, Color.White, "Steam: [empty_link]", Color.Red )
-	Chat:Broadcast( self.err_prefix, Color.White, "VK: [empty_link]", Color.Red )
+	Chat:Broadcast( self.err_prefix, Color.White, "Discord: https://cclx.win/NFXd0", Color.Red )
+	Chat:Broadcast( self.err_prefix, Color.White, "Steam: steamcommunity.com/groups/rusjc", Color.Red )
+	Chat:Broadcast( self.err_prefix, Color.White, "VK: vk.com/rusjc", Color.Red )
 	Events:Fire( "ToDiscord", { text = "**[Error] Critical server error has occurred! Module: " .. e.module .. "**" })
 	Events:Fire( "ToDiscordConsole", { text = "**[Error] Critical server error has occurred! Module: " .. e.module .. "**" .. "\nERROR CODE:\n```" .. e.error .. "```" } )
 	for p in Server:GetPlayers() do

@@ -245,7 +245,7 @@ function Menu:Render()
 		local links_pos = Vector2( 40, 50 )
 
 		Render:DrawText( links_pos, "ССЫЛКИ / LINKS:", Color.White, 25 )
-		Render:DrawText( Vector2( links_pos.x, links_pos.y + Render:GetTextHeight( "ССЫЛКИ / LINKS:", 25 ) + 10 ), "- TELEGRAM | [empty_link]\n- DISCORD | [empty_link]\n- STEAM | [empty_link]\n- VK | [empty_link]", Color( 180, 180, 180 ), 20 )
+		Render:DrawText( Vector2( links_pos.x, links_pos.y + Render:GetTextHeight( "ССЫЛКИ / LINKS:", 25 ) + 10 ), "- TELEGRAM | t.me/rusjc\n- DISCORD | https://cclx.win/NFXd0\n- STEAM | steamcommunity.com/groups/rusjc\n- VK | vk.com/rusjc", Color( 180, 180, 180 ), 20 )
 		Render:DrawText( Vector2( Render.Size.x / 2 - Render:GetTextWidth( self.tName, 30 ) / 2, Render.Size.y / 2.5 ), self.tName, Color.White, 30 )
 
 		LocalPlayer:GetAvatar():Draw( playername_pos, Vector2( 40, 40 ), Vector2.Zero, Vector2.One )
@@ -359,7 +359,11 @@ function Menu:Rus()
 	local type = 0
 
 	if type == 0 then
-		Events:Fire( "OpenWhatsNew", { titletext = "Внимание!", text = "Данный сервер основан на открытом исходном коде и не является официальным.", usepause = true } )
+		Events:Fire( "OpenWhatsNew", { titletext = "СТАНЬТЕ СПОНСОРОМ СЕРВЕРА", text = "Задонатьте более, чем 500 рублей для попадания в список спонсоров!\nСпонсируя сервер и его автора, вы мотивируете и продлеваете жизнь проекту ( и не только ).\n \nСсылки:\n> Донат - https://cclx.win/FGXd0\n> Discord - https://cclx.win/NFXd0\n> Telegram - t.me/rusjc\n \nС помощью доната, вы также можете приобрести какую-либо услугу на сервере или привилегию.", usepause = true } )
+	elseif type == 1 then
+		Events:Fire( "OpenWhatsNew", { titletext = "РАЗ И НАВСЕГДА ( ͡° ͜ʖ ͡°)", text = "Успейте приобрести VIP навсегда за 50 рублей!\nАкция действует до 16-го апреля.\n \nСсылки:\n> Донат - https://cclx.win/FGXd0\n> Discord - https://cclx.win/NFXd0\n> Telegram - t.me/rusjc\n\nСписок возможностей для VIP перечислен в меню помощи.", usepause = true } )
+	elseif type == 2 then
+		Events:Fire( "OpenWhatsNew", { titletext = "ПОДДЕРЖКА СООБЩЕСТВА", text = "Создавайте контент с участием нашего сервера, а мы будем продвигать вас!\n      Подробности о поддержке сообщества сможете найти в меню помощи.", usepause = true } )
 	end
 	self:Selected()
 end
@@ -373,11 +377,7 @@ function Menu:Eng()
 	Events:Fire( "EngHelp" )
 	Events:Fire( "Lang" )
 
-	local type = 0
-
-	if type == 0 then
-		Events:Fire( "OpenWhatsNew", { titletext = "Warning!", text = "This server is based on open source code and is not official.", usepause = true } )
-	end
+	--Events:Fire( "OpenWhatsNew", { titletext = "SPONSOR THE SERVER", text = "Donate more than 6,16$ to be in the list of sponsors!\nBy sponsoring the server and its author, you motivate and prolong the life of the project (and not only).\n \nLinks:\n> Donate - https://cclx.win/FGXd0\n> Discord - https://cclx.win/NFXd0\n> Telegram - t.me/rusjc\n \nWith donation, you can also buy some service on the server or a privilege.", usepause = true } )
 	self:Selected()
 end
 

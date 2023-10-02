@@ -633,6 +633,40 @@ function Settings:LoadCategories()
 	skySettingSRnb:GetLabel():SetText( "Переливания цветов неба" )
 	skySettingSRnb:GetLabel():SetTextSize( 13 )
 	skySettingSRnb:GetCheckBox():Subscribe( "CheckChanged", function() self.skyRainbow = skySettingSRnb:GetCheckBox():GetChecked() if self.skyRainbow then self.rT = Timer() else self.rT = nil end end )
+
+	if Debug.ShowDebugTab then
+		local debug = BaseWindow.Create( self.window )
+		self.tab:AddPage( "DEBUG", debug )
+
+		local scroll_control = ScrollControl.Create( debug )
+		scroll_control:SetScrollable( false, true )
+		scroll_control:SetDock( GwenPosition.Fill )
+		scroll_control:SetMargin( Vector2( 5, 5 ), Vector2( 5, 5 ) )
+
+		local button = LabeledCheckBox.Create( scroll_control )
+		button:GetLabel():SetText( "Show OSD" )
+		button:SetSize( Vector2( 300, 20 ) )
+		button:GetLabel():SetTextSize( 15 )
+		button:SetDock( GwenPosition.Top )
+		button:GetCheckBox():SetChecked( LocalPlayer:GetValue( "DEBUGShowOSD" ) or false )
+		button:GetCheckBox():Subscribe( "CheckChanged", function() LocalPlayer:SetValue( "DEBUGShowOSD", not LocalPlayer:GetValue( "DEBUGShowOSD" ) ) end )
+
+		local button = LabeledCheckBox.Create( scroll_control )
+		button:GetLabel():SetText( "Show player info" )
+		button:SetSize( Vector2( 300, 20 ) )
+		button:GetLabel():SetTextSize( 15 )
+		button:SetDock( GwenPosition.Top )
+		button:GetCheckBox():SetChecked( LocalPlayer:GetValue( "DEBUGShowPlayerInfo" ) or false )
+		button:GetCheckBox():Subscribe( "CheckChanged", function() LocalPlayer:SetValue( "DEBUGShowPlayerInfo", not LocalPlayer:GetValue( "DEBUGShowPlayerInfo" ) ) end )
+
+		local button = LabeledCheckBox.Create( scroll_control )
+		button:GetLabel():SetText( "Show vehicle info" )
+		button:SetSize( Vector2( 300, 20 ) )
+		button:GetLabel():SetTextSize( 15 )
+		button:SetDock( GwenPosition.Top )
+		button:GetCheckBox():SetChecked( LocalPlayer:GetValue( "DEBUGShowVehicleInfo" ) or false )
+		button:GetCheckBox():Subscribe( "CheckChanged", function() LocalPlayer:SetValue( "DEBUGShowVehicleInfo", not LocalPlayer:GetValue( "DEBUGShowVehicleInfo" ) ) end )
+	end
 end
 
 function Settings:GameRender()

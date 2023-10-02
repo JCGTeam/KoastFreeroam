@@ -61,7 +61,7 @@ end
 function GodCheck:Speedhack( args, player )
     player:Kick( string.format( "Speedhack - difference of %.2f detected.", args.diff) .. "\nЧто-то пошло не так. Пожалуйста, перезапустите игру. \n \n" ..
     "Проблема остается? Сообщите об этом нам! \n \n" ..
-	"Поддержка в VK - [empty_link]\nПоддержка в Steam - [empty_link]\nПоддержка в Discord - [empty_link]" )
+	"Поддержка в VK - vk.com/rusjc\nПоддержка в Steam - steamcommunity.com/groups/rusjc\nПоддержка в Discord - https://cclx.win/NFXd0" )
 	Events:Fire( "ToDiscordConsole", { text = "[AntiCheat] " .. player:GetName() .. string.format( " Speedhack - difference of %.2f detected.", args.diff) } )
 end
 

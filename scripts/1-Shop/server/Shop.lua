@@ -237,7 +237,7 @@ function Shop:BuyVehicle( player, item, tone1, tone2 )
 			self:ExecuteVehicle( player, item, tone1, tone2 )
 			return true, ""
 		else
-			return false, "У вас отсутствует VIP статус! Приобрести можно в группе в VK - [empty_link]", Network:Send( player, "NoVipText" )
+			return false, "У вас отсутствует VIP статус! Приобрести можно в группе в VK - vk.com/rusjc", Network:Send( player, "NoVipText" )
 		end
 	end
 
@@ -319,7 +319,7 @@ function Shop:BuyWeapon( player, item )
 			self:ExecuteWeapon( player, item )
 			return true, ""
 		else
-			return false, "У вас отсутствует VIP статус! Приобрести можно в группе в VK - [empty_link]", Network:Send( player, "NoVipText" )
+			return false, "У вас отсутствует VIP статус! Приобрести можно в группе в VK - vk.com/rusjc", Network:Send( player, "NoVipText" )
 		end
 	end
 
@@ -345,7 +345,7 @@ function Shop:BuyModel( player, item )
 			self:ExecuteModel( player, item )
 			return true, ""
 		else
-			return false, "У вас отсутствует VIP статус! Приобрести можно в группе в VK - [empty_link]", Network:Send( player, "NoVipText" )
+			return false, "У вас отсутствует VIP статус! Приобрести можно в группе в VK - vk.com/rusjc", Network:Send( player, "NoVipText" )
 		end
 	end
 	self:ExecuteModel( player, item )
@@ -366,7 +366,7 @@ function Shop:BuyAppearance( player, item )
 			self:ExecuteAppearance( player, item )
 			return true, ""
 		else
-			return false, "У вас отсутствует VIP статус! Приобрести можно в группе в VK - [empty_link]", Network:Send( player, "NoVipText" )
+			return false, "У вас отсутствует VIP статус! Приобрести можно в группе в VK - vk.com/rusjc", Network:Send( player, "NoVipText" )
 		end
 	end
 	self:ExecuteAppearance( player, item )

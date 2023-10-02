@@ -74,7 +74,7 @@ function BetterMinimap.DrawPlayer( position, triangle, color )
 	local distance = Vector3.Distance( playerPosition, position )
 
 	if Game:GetSetting(4) >= 1 then
-		if distance <= 5000 then
+		--if distance <= 5000 then
 			local size = Render.Size.x / 350
 			local sSize = Render.Size.x / 300
 
@@ -88,7 +88,7 @@ function BetterMinimap.DrawPlayer( position, triangle, color )
 				Render:FillCircle( pos, size, Color( color.r, color.g, color.b, Game:GetSetting(4) * 2.25 ) )
 				Render:DrawCircle( pos, size, Color( 0, 0, 0, Game:GetSetting(4) * 2.25 ) )
 			end
-		end
+		--end
 	end
 end
 
