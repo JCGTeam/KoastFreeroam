@@ -1,1 +1,1 @@
-git pull origin latest && exit
+git pull origin latest
