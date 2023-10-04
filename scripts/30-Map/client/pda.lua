@@ -46,7 +46,7 @@ function PDA:__init()
 	self.dragging          = false
 	self.lastMousePosition = Mouse:GetPosition()
 	
-	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "ENG" then
+	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "EN" then
 		self:Lang()
 	else
 		MTSetWp = "[СКМ] / [1] - поставить точку назначения"

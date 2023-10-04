@@ -4,7 +4,7 @@ function Manhunt:__init()
 	Events:Subscribe( "Lang", self, self.Lang )
 	Events:Subscribe( "GoHunt", self, self.GoHunt )
 
-	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "ENG" then
+	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "EN" then
 		self:Lang()
 	else
 		self.yourscorestxt = "Ваши очки: "

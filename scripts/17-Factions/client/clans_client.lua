@@ -506,7 +506,7 @@ function ClanSystem:ModuleLoad()
 	Events:Subscribe( "PlayerJoin", self, self.PlayerJoin )
 	Events:Subscribe( "PlayerQuit", self, self.PlayerQuit )
 
-	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "ENG" then
+	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "EN" then
 		self:Lang()
 	else
 		self.clanMenu.cLabel:SetText( "Клан" )
@@ -613,7 +613,7 @@ end
 function ClanSystem:GetClanInfo()
 	local row = self.clanMenu.list:GetSelectedRow()
 	if ( row ~= nil ) then
-		if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "ENG" then
+		if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "EN" then
 			self.clanMenu.bkpanelsLabel:SetText( "Name: " .. row:GetCellText( 0 ) .. "\nCreation date: " .. row:GetName():sub( 0, 17 ) .. "\nFounder: " .. row:GetCellText( 1 ) .. "\nType: " .. row:GetCellText( 2 ) .. "\nDescription: " .. row:GetName():sub( 18 ) )
 		else
 			self.clanMenu.bkpanelsLabel:SetText( "Название: " .. row:GetCellText( 0 ) .. "\nДата создания: " .. row:GetName():sub( 0, 17 ) .. "\nОснователь: " .. row:GetCellText( 1 ) .. "\nТип: " .. row:GetCellText( 2 ) .. "\nОписание: " .. row:GetName():sub( 18 ) )
@@ -836,7 +836,7 @@ function ClanSystem:ReceiveData( args )
 	self.manageClan.newstbLabel:SetText( args.newstext )
 	self.manageClan.newstbLabel:SizeToContents()
 
-	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "ENG" then
+	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "EN" then
 		self.manageClan.ciLabel:SetText(
 			"> Clan name: " .. tostring ( args.clanData.name ) ..
 			"\n\n★ Clan type: " .. ( args.clanData.type == "Открытый" and "Публичный" or "По приглашению" ) ..

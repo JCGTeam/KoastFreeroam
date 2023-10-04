@@ -218,7 +218,7 @@ function Grenades:Render()
 		if LocalPlayer:GetValue("exp") == 1 then
 			imga = self.grenadeIMG
 
-			if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "ENG" then
+			if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "EN" then
 				text = "Fragmentation Grenade"
 			else
 				text = "Осколочная граната"
@@ -237,7 +237,7 @@ function Grenades:Render()
 		elseif LocalPlayer:GetValue("exp") == 2 then
 			imga = self.c4
 
-			if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "ENG" then
+			if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "EN" then
 				text = "Triggered Explosive"
 			else
 				text = "Бомбы-липучки"
@@ -253,7 +253,7 @@ function Grenades:Render()
 		elseif LocalPlayer:GetValue("exp") == 3 then
 			imga = self.clay
 
-			if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "ENG" then
+			if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "EN" then
 				text = "Claymore Mine"
 			else
 				text = "Мины Клеймор"
@@ -261,7 +261,7 @@ function Grenades:Render()
 			timer_text = "∞"
 			self.c4actv = false
 		elseif LocalPlayer:GetValue("exp") == 4 then
-			if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "ENG" then
+			if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "EN" then
 				text = "Firework Grenade"
 			else
 				text = "Фейерверковая граната"
@@ -278,7 +278,7 @@ function Grenades:Render()
 					end
 			end
 		elseif LocalPlayer:GetValue("exp") == 5 then
-			if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "ENG" then
+			if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "EN" then
 				text = "Nuclear Grenade"
 			else
 				text = "Ядерная граната"
@@ -294,7 +294,7 @@ function Grenades:Render()
 					end
 			end
 		elseif LocalPlayer:GetValue("exp") == 6 then
-			if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "ENG" then
+			if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "EN" then
 				text = "SUPER Nuclear Grenade"
 			else
 				text = "СУПЕР Ядерная граната"

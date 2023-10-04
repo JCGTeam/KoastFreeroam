@@ -50,7 +50,7 @@ function Settings:__init()
 
 	self:LoadCategories()
 
-	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "ENG" then
+	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "EN" then
 		self:Lang()
 	else
 		self.window:SetTitle( "▧ Настройки" )

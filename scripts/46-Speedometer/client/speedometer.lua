@@ -29,7 +29,7 @@ function Speedometer:__init()
 	self.unit = 1
 	self.position = LocalPlayer:GetPosition()
 
-	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "ENG" then
+	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "EN" then
 		self:Lang()
 	else
 		self.name = "м/с"

@@ -55,7 +55,7 @@ function Abilities:__init()
     self.window:SetVisible( self.active )
     self.window:Subscribe( "WindowClosed", self, self.WindowClosed )
 
-    if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "ENG" then
+    if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "EN" then
 		self:Lang()
 	else
         self.needed_txt = "Цена"
@@ -744,7 +744,7 @@ function Abilities:Open()
         end
 
         if LocalPlayer:GetValue( "Lang" ) then
-			if LocalPlayer:GetValue( "Lang" ) == "РУС" then
+			if LocalPlayer:GetValue( "Lang" ) == "RU" then
                 self.money_text:SetText( "Баланс: $" .. formatNumber( LocalPlayer:GetMoney() ) )
                 self.money_text:SizeToContents()
             else
@@ -937,7 +937,7 @@ function Abilities:UpdateMoneyString( money )
     end
 
     if LocalPlayer:GetValue( "Lang" ) then
-        if LocalPlayer:GetValue( "Lang" ) == "РУС" then
+        if LocalPlayer:GetValue( "Lang" ) == "RU" then
             self.money_text:SetText( "Баланс: $" .. formatNumber( money ) )
             self.money_text:SizeToContents()
         else

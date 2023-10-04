@@ -26,7 +26,7 @@ function Bank:__init()
 	self.rows = {}
 	self:CreateSendMoneyWindow()
 
-	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "ENG" then
+	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "EN" then
 		self:Lang()
 	else
 		self.money = "Баланс: $"
@@ -302,7 +302,7 @@ function Bank:MoneyChange( args )
     end
 
     if LocalPlayer:GetValue( "Lang" ) then
-		if LocalPlayer:GetValue( "Lang" ) == "РУС" then
+		if LocalPlayer:GetValue( "Lang" ) == "RU" then
 			self.plist.balance:SetText( "Баланс: $" .. formatNumber( args.new_money ) )
 		else
 			self.plist.balance:SetText( "Money: $" .. formatNumber( args.new_money ) )

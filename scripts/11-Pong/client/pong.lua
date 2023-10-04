@@ -1,7 +1,7 @@
 class 'Pong'
 
 function Pong:__init()
-	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "ENG" then
+	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "EN" then
 		self:Lang()
 	else
 		self.tip_txt = "Подсказка: Используйте мышку для перемещения платформы."

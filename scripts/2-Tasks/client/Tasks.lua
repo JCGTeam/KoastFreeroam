@@ -25,7 +25,7 @@ function Tasks:__init()
 	local args = { path = "Models/TargetArrow", type = OBJLoader.Type.Single }
 	OBJLoader.Request( args, self, self.ModelReceive )
 
-	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "ENG" then
+	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "EN" then
 		self:Lang()
 	else
 		self.rewardtip = "Награда: $"

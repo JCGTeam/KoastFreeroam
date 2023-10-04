@@ -22,7 +22,7 @@ function Boost:__init()
 	self.windowOpen   = false
 	self.delta        = 0
 
-	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "ENG" then
+	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "EN" then
 		self:Lang()
 	else
 		self.name = "Нажмите "

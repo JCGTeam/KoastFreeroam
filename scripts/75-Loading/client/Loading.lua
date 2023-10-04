@@ -13,7 +13,7 @@ function Load:__init()
 	self.BackgroundImage = Image.Create( AssetLocation.Resource, self.loads[math.random(#self.loads)] )
 	self.LoadingCircle_Outer = Image.Create( AssetLocation.Game, "fe_initial_load_icon_dif.dds" )
 
-	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "ENG" then
+	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "EN" then
 		self:Lang()
 	else
 		self.name = "СОВЕТ: Нажмите [ B ], чтобы открыть меню сервера."

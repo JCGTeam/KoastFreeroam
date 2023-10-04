@@ -7,7 +7,7 @@ function KingHil:__init()
 	self.queueMin = 0
 	self.queueMax = 0
 
-	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "ENG" then
+	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "EN" then
 		self:Lang()
 	else
 		self.nameT = "Игроки"

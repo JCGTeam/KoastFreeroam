@@ -245,7 +245,7 @@ function Tetris:__init()
 
 	self:PopulateGrid()
 
-	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "ENG" then
+	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "EN" then
 		self:Lang()
 	else
 		self.window:SetTitle( "▧ Тетрис - Список лидеров" )

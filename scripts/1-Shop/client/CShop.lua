@@ -72,7 +72,7 @@ function Shop:__init()
 	self.buy_button:SetDock( GwenPosition.Bottom )
 	self.buy_button:Subscribe( "Press", self, self.Buy )
 
-	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "ENG" then
+	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "EN" then
 		self:Lang()
 	else
 		self.nameBM = "Вы заказали: "

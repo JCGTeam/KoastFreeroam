@@ -14,7 +14,7 @@ function Drift:__init()
 
 	self.showTimer = Timer()
 
-	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "ENG" then
+	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "EN" then
 		self:Lang()
 	else
 		self.tWidg = "Хорошечный Дрифтер:"

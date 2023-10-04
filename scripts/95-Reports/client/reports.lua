@@ -27,7 +27,7 @@ function Reports:__init()
 
 	self:CreateWindow()
 
-	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "ENG" then
+	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "EN" then
 		self:Lang()
 	else
 		self.sendbuttonsending_txt = "Отправка..."
