@@ -30,7 +30,7 @@ function Tips:Render()
 		local chatPos = Chat:GetPosition()
 
 		if LocalPlayer:GetValue( "ChatBackgroundVisible" ) then
-			Render:FillArea( chatPos + Vector2( -4, 0 ), Vector2( 508, - Render:GetTextHeight( self.text ) * 13.5 ), Color( 0, 0, 0, 80 ) )
+			Render:FillArea( chatPos + Vector2( -4, 0 ), Vector2( 508, - Render:GetTextHeight( text ) * 13.5 ), Color( 0, 0, 0, 80 ) )
 		end
 
 		if LocalPlayer:GetValue( "ChatTipsVisible" ) then
