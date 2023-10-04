@@ -1,11 +1,7 @@
-class 'Settings'
+class 'ServerMenu'
 
-local Cashes = { 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2100, 2000, 2200, 2300, 2400, 2500, 100, 200, 300, 400, 500, 600, 700, 800, 900 }
-
-function Settings:__init()
-	GoCashes = Cashes[math.random(#Cashes)]
-
-	Network:Subscribe( "Cash", self, self.Cash )
+function ServerMenu:__init()
+	Network:Subscribe( "PayDay", self, self.PayDay )
 	Network:Subscribe( "ToggleHideMe", self, self.ToggleHideMe )
 
 	Events:Subscribe( "PostTick", self, self.PostTick )
@@ -13,24 +9,26 @@ function Settings:__init()
 	self.timer = Timer()
 end
 
-function Settings:PostTick( args )
-	if self.timer:GetHours() >= 1 then
-		for p in Server:GetPlayers() do
-			Network:Send( p, "Bonus" )
-		end
-		self.timer:Restart()
+function ServerMenu:PostTick()
+	if self.timer:GetHours() <= PayDay.Delay then return end
+
+	for p in Server:GetPlayers() do
+		Network:Send( p, "Bonus" )
 	end
+
+	self.timer:Restart()
 end
 
-function Settings:Cash( args, sender )
-	GoCashes = Cashes[math.random(#Cashes)]
+function ServerMenu:PayDay( args, sender )
+	local payday_value = PayDay.Value[math.random(#PayDay.Value)]
+
 	if sender:GetValue( "MoneyBonus" ) then
-		sender:SetMoney( sender:GetMoney() + GoCashes )
+		sender:SetMoney( sender:GetMoney() + payday_value )
 	end
 end
 
-function Settings:ToggleHideMe( args, sender )
+function ServerMenu:ToggleHideMe( args, sender )
 	sender:SetNetworkValue( "HideMe", not sender:GetValue( "HideMe" ) )
 end
 
-settings = Settings()
+servermenu = ServerMenu()

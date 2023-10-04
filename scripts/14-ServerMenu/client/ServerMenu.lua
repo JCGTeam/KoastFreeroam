@@ -59,6 +59,7 @@ function ServerMenu:__init()
 		self.enabletxt_2 = " включен"
 	end
 
+
 	Events:Subscribe( "Lang", self, self.Lang )
     Events:Subscribe( "KeyUp", self, self.KeyUp )
 	Events:Subscribe( "LocalPlayerInput", self, self.LocalPlayerInput )
@@ -231,7 +232,7 @@ function ServerMenu:LoadCategories()
 	self.bonus_btn:SetTextPressedColor( Color.Yellow )
 	self.bonus_btn:SetTextSize( 15 )
 	self.bonus_btn:SetDock( GwenPosition.Top )
-	self.bonus_btn:Subscribe( "Press", self, self.Cash )
+	self.bonus_btn:Subscribe( "Press", self, self.PayDay )
 
 	self.report_btn = Button.Create( self.rightlabel )
 	self.report_btn:SetText( "Обратная связь" )
@@ -251,7 +252,7 @@ function ServerMenu:LoadCategories()
 	self.level = Label.Create( self.leftlabel )
 	self.level:SetTextColor( Color( 251, 184, 41 ) )
 	self.level:SetTextSize( 20 )
-	self.level:SetText( "Баланс: $" .. formatNumber( LocalPlayer:GetMoney() ) )
+	self.level:SetText( "Баланс: $Х/З" )
 	self.level:SizeToContents()
 	self.level:SetMargin( Vector2( 10, 5 ), Vector2( 0, 0 ) )
 	self.level:SetDock( GwenPosition.Bottom )
@@ -639,8 +640,7 @@ function ServerMenu:CastReportMenu()
 	end
 end
 
-
-function ServerMenu:Cash()
+function ServerMenu:PayDay()
 	local sound = ClientSound.Create(AssetLocation.Game, {
 		bank_id = 20,
 		sound_id = 20,
@@ -650,7 +650,7 @@ function ServerMenu:Cash()
 
 	sound:SetParameter(0,1)
 
-	Network:Send( "Cash" )
+	Network:Send( "PayDay" )
 	self.bonus_btn:SetEnabled( false )
 end
 
