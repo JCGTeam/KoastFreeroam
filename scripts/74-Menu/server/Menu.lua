@@ -31,6 +31,7 @@ function Menu:SetEng( args, sender )
 	sender:SetNetworkValue( "Warned", 1 )
 
 	sender:SetNetworkValue( "Lang", "EN" )
+	Events:Fire( "GetLocalization", { player = sender } )
 
 	local pcountry = sender:GetValue( "Country" )
 
@@ -51,6 +52,7 @@ function Menu:SetRus( args, sender )
 	end
 
 	sender:SetNetworkValue( "Lang", "RU" )
+	Events:Fire( "GetLocalization", { player = sender } )
 
 	if sender:GetValue( "Country" ) and sender:GetValue( "Country" ) == "N/A" then
 		sender:SetNetworkValue( "Country", "RU" )
