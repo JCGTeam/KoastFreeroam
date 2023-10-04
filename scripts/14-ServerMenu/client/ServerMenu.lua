@@ -650,9 +650,9 @@ function math.round( number, decimals, method )
 end
 
 function formatNumber( amount )
-	local formatted = tostring( amount );
+	local formatted = tostring( amount )
 	while true do  
-		formatted, k = string.gsub( formatted, "^(-?%d+)(%d%d%d)", '%1.%2' );
+		formatted, k = string.gsub( formatted, "^(-?%d+)(%d%d%d)", '%1.%2' )
 		if (k==0) then
 			break
 		end

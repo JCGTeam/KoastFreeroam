@@ -3,18 +3,13 @@ class 'Tips'
 function Tips:__init()
 	self.active = true
 
-	if LocalPlayer:GetValue( "Lang" ) == "EN" then
-		self:Lang()
-	else
-		self.text = "Чат: T  I Меню сервера: B I Меню действий: V"
-	end
+	Network:Subscribe( "LoadLocalizationData", function( language )
+		local loc = language
 
-	Events:Subscribe( "Lang", self, self.Lang )
+		self.tip_txt = loc["tip_txt"] or "..."
+	end )
+
 	Events:Subscribe( "Render", self, self.Render )
-end
-
-function Tips:Lang()
-	self.text = "Chat: T  I Server Menu: B I Actions Menu: V"
 end
 
 function Tips:Render()
@@ -30,7 +25,7 @@ function Tips:Render()
 	end
 
 	if Chat:GetEnabled() and Chat:GetUserEnabled() and not Chat:GetActive() then
-		local text_width = Render:GetTextWidth( self.text )
+		local text_width = Render:GetTextWidth( self.tip_txt )
 		local chatPos = Chat:GetPosition()
 
 		if LocalPlayer:GetValue( "ChatBackgroundVisible" ) then
@@ -49,8 +44,8 @@ function Tips:Render()
 			end
 
 			local textpos = chatPos + Vector2( 1, 11 )
-			Render:DrawText( textpos + Vector2.One, self.text, Color( 25, 25, 25, 150 ), 14 )
-			Render:DrawText( textpos, self.text, Color( 215, 215, 215 ), 14 )
+			Render:DrawText( textpos + Vector2.One, self.tip_txt, Color( 25, 25, 25, 150 ), 14 )
+			Render:DrawText( textpos, self.tip_txt, Color( 215, 215, 215 ), 14 )
 		end
 	end
 end

@@ -13,16 +13,15 @@ function Load:__init()
 	self.BackgroundImage = Image.Create( AssetLocation.Resource, self.loads[math.random(#self.loads)] )
 	self.LoadingCircle_Outer = Image.Create( AssetLocation.Game, "fe_initial_load_icon_dif.dds" )
 
-	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "EN" then
-		self:Lang()
-	else
-		self.name = "СОВЕТ: Нажмите [ B ], чтобы открыть меню сервера."
-		self.wtitle = "ОШИБКА :С"
-		self.wtext = "Возможно, вы застряли на экране загрузки. \nЖелаете покинуть сервер?"
-		self.wbutton = "Покинуть сервер"
-	end
+	Network:Subscribe( "LoadLocalizationData", function( language )
+		local loc = language
 
-	Events:Subscribe( "Lang", self, self.Lang )
+		self.tip_txt = loc["tip_txt"] or "..."
+		self.warningtitle_txt = loc["warningtitle_txt"] or "..."
+		self.warningdescription_txt = loc["warningdescription_txt"] or "..."
+		self.warningbtn_txt = loc["warningbtn_txt"] or "..."
+	end )
+
 	Events:Subscribe( "ModuleLoad", self, self.ModuleLoad )
 	Events:Subscribe( "GameLoad", self, self.GameLoad )
 	Events:Subscribe( "LocalPlayerDeath", self, self.LocalPlayerDeath )
@@ -31,13 +30,6 @@ function Load:__init()
 	self.IsJoining = false
 
 	self.border_width = Vector2( Render.Width, 25 )
-end
-
-function Load:Lang()
-	self.name = "TIP: Press [ B ] to open Server Menu."
-	self.wtitle = "ERROR :С"
-	self.wtext = "You maybe stuck on the loading screen. \nWant to leave the server?"
-	self.wbutton = "Leave Server"
 end
 
 function Load:ModuleLoad()
@@ -66,7 +58,7 @@ end
 function Load:PostRender()
 	if Game:GetState() == GUIState.Loading then
 		local TxtSizePos = Render.Size.x / 0.55 / Render:GetTextWidth( "BTextResoliton" )
-		local TxtSize = Render:GetTextSize( self.name, TxtSizePos )
+		local TxtSize = Render:GetTextSize( self.tip_txt, TxtSizePos )
 		local CircleSize = Vector2( 70, 70 )
 		local TransformOuter = Transform2()
 		local TxtPos = Vector2( ( Render.Size.x/2 ) - ( TxtSize.x/2 ), Render.Size.y / 1.100 )
@@ -84,8 +76,8 @@ function Load:PostRender()
 		if LocalPlayer:GetValue( "SystemFonts" ) then
 			Render:SetFont( AssetLocation.SystemFont, "Impact" )
 		end
-		Render:DrawText( PosTw, self.name, Color( 0, 0, 0 ), TxtSizePos )
-		Render:DrawText( Pos, self.name, Color.White, TxtSizePos )
+		Render:DrawText( PosTw, self.tip_txt, Color( 0, 0, 0 ), TxtSizePos )
+		Render:DrawText( Pos, self.tip_txt, Color.White, TxtSizePos )
 
 		if self.FadeInTimer then
 			TransformOuter:Translate( PosTh )
@@ -115,19 +107,19 @@ function Load:ExitWindow()
 	self.window:SetMinimumSize( Vector2( 500, 200 ) )
 	self.window:SetPositionRel( Vector2( 0.7, 0.5 ) - self.window:GetSizeRel()/2 )
 	self.window:SetVisible( true )
-	self.window:SetTitle( self.wtitle )
+	self.window:SetTitle( self.warningtitle_txt )
 	self.window:Subscribe( "WindowClosed", self, self.WindowClosed )
 
 	self.errorText = Label.Create( self.window )
 	self.errorText:SetPosition( Vector2( 20, 30 ) )
 	self.errorText:SetSize( Vector2( 450, 100 ) )
-	self.errorText:SetText( self.wtext )
+	self.errorText:SetText( self.warningdescription_txt )
 	self.errorText:SetTextSize( 20 )
 
 	self.leaveButton = Button.Create( self.window )
 	self.leaveButton:SetSize( Vector2( 100, 40 ) )
 	self.leaveButton:SetDock( GwenPosition.Bottom )
-	self.leaveButton:SetText( self.wbutton )
+	self.leaveButton:SetText( self.warningbtn_txt )
 	self.leaveButton:Subscribe( "Press", self, self.Exit )
 end
 
