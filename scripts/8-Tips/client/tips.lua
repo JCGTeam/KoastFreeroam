@@ -25,7 +25,8 @@ function Tips:Render()
 	end
 
 	if Chat:GetEnabled() and Chat:GetUserEnabled() and not Chat:GetActive() then
-		local text_width = Render:GetTextWidth( self.tip_txt )
+		local text = self.tip_txt or "..."
+		local text_width = Render:GetTextWidth( text )
 		local chatPos = Chat:GetPosition()
 
 		if LocalPlayer:GetValue( "ChatBackgroundVisible" ) then
@@ -44,8 +45,8 @@ function Tips:Render()
 			end
 
 			local textpos = chatPos + Vector2( 1, 11 )
-			Render:DrawText( textpos + Vector2.One, self.tip_txt, Color( 25, 25, 25, 150 ), 14 )
-			Render:DrawText( textpos, self.tip_txt, Color( 215, 215, 215 ), 14 )
+			Render:DrawText( textpos + Vector2.One, text, Color( 25, 25, 25, 150 ), 14 )
+			Render:DrawText( textpos, text, Color( 215, 215, 215 ), 14 )
 		end
 	end
 end
