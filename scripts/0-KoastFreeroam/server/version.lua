@@ -26,6 +26,7 @@ end
 
 function Version:GetVersion()
     local file = io.open( "version.txt", "r" )
+
     if file then
         s = file:read( "*a" )
 
