@@ -58,57 +58,57 @@ function ServerMenu:__init()
 	Network:Subscribe( "LoadLocalizationData", function( language )
 		local loc = language
 
-		self.pigeonmod_txt = loc["pigeonmod_txt"]
-		self.hideme_txt = loc["hideme_txt"]
-		self.disabled_txt = loc["disabled_txt"]
-		self.enabled_txt = loc["enabled_txt"]
-		self.disable_txt_2 = loc["disable_txt_2"]
-		self.enable_txt_2 = loc["enable_txt_2"]
-		self.gametime_txt = loc["gametime_txt"]
+		self.pigeonmod_txt = loc["pigeonmod_txt"] or "..."
+		self.hideme_txt = loc["hideme_txt"] or "..."
+		self.disabled_txt = loc["disabled_txt"] or "..."
+		self.enabled_txt = loc["enabled_txt"] or "..."
+		self.disable_txt_2 = loc["disable_txt_2"] or "..."
+		self.enable_txt_2 = loc["enable_txt_2"] or "..."
+		self.gametime_txt = loc["gametime_txt"] or "..."
 		self.gametime:SizeToContents()
-		self.balance_txt = loc["balance_txt"]
-		self.bonustag_txt = loc["bonustag_txt"]
-		self.moneybonusavailable_txt = loc["moneybonusavailable_txt"]
-		self.enable_txt = loc["enable_txt"]
-		self.disable_txt = loc["disable_txt"]
-		self.moneybonus_txt = loc["moneybonus_txt"]
-		self.moneybonusnotavailable_txt = loc["moneybonusnotavailable_txt"]
+		self.balance_txt = loc["balance_txt"] or "..."
+		self.bonustag_txt = loc["bonustag_txt"] or "..."
+		self.moneybonusavailable_txt = loc["moneybonusavailable_txt"] or "..."
+		self.enable_txt = loc["enable_txt"] or "..."
+		self.disable_txt = loc["disable_txt"] or "..."
+		self.moneybonus_txt = loc["moneybonus_txt"] or "..."
+		self.moneybonusnotavailable_txt = loc["moneybonusnotavailable_txt"] or "..."
 
 		if self.window then
-			self.window:SetTitle( loc["servermenutitle_txt"] )
-			self.news_button:SetText( loc["news_button_txt"] )
+			self.window:SetTitle( loc["servermenutitle_txt"] or "..." )
+			self.news_button:SetText( loc["news_button_txt"] or "..." )
 			self.news_button:SetWidth( Render:GetTextWidth( self.news_button:GetText() ) + 25 )
-			self.help_button:SetText( loc["help_button_txt"] )
-			self.shop_button:SetText( loc["shop_button_txt"] )
-			self.shop_button:SetToolTip( loc["shop_button_tooltip_txt"] )
-			self.tp_button:SetText( loc["tp_button_txt"] )
-			self.tp_button:SetToolTip( loc["tp_button_tooltip_txt"] )
-			self.clans_button:SetText( loc["clans_button_txt"] )
-			self.clans_button:SetToolTip( loc["clans_button_tooltip_txt"] )
-			self.pm_button:SetText( loc["pm_button_txt"] )
-			self.pm_button:SetToolTip( loc["pm_button_tooltip_txt"] )
-			self.sett_button:SetText( loc["sett_button_txt"] )
-			self.sett_button:SetToolTip( loc["sett_button_tooltip_txt"] )
-			self.tasks_button:SetToolTip( loc["tasks_button_tooltip_txt"] )
-			self.tasks_button:SetText( loc["tasks_button_txt"] )
+			self.help_button:SetText( loc["help_button_txt"] or "..." )
+			self.shop_button:SetText( loc["shop_button_txt"] or "..." )
+			self.shop_button:SetToolTip( loc["shop_button_tooltip_txt"] or "..." )
+			self.tp_button:SetText( loc["tp_button_txt"] or "..." )
+			self.tp_button:SetToolTip( loc["tp_button_tooltip_txt"] or "..." )
+			self.clans_button:SetText( loc["clans_button_txt"] or "..." )
+			self.clans_button:SetToolTip( loc["clans_button_tooltip_txt"] or "..." )
+			self.pm_button:SetText( loc["pm_button_txt"] or "..." )
+			self.pm_button:SetToolTip( loc["pm_button_tooltip_txt"] or "..." )
+			self.sett_button:SetText( loc["sett_button_txt"] or "..." )
+			self.sett_button:SetToolTip( loc["sett_button_tooltip_txt"] or "..." )
+			self.tasks_button:SetToolTip( loc["tasks_button_tooltip_txt"] or "..." )
+			self.tasks_button:SetText( loc["tasks_button_txt"] or "..." )
 			self.minigames_button:SetText( loc["minigames_button_txt"] )
-			self.minigames_button:SetToolTip( loc["minigames_button_tooltip_txt"] )
-			self.abilities_button:SetText( loc["abilities_button_txt"] )
-			self.abilities_button:SetToolTip( loc["abilities_button_tooltip_txt"] )
-			self.passive:SetText( loc["passive_txt"] )
+			self.minigames_button:SetToolTip( loc["minigames_button_tooltip_txt"] or "..." )
+			self.abilities_button:SetText( loc["abilities_button_txt"] or "..." )
+			self.abilities_button:SetToolTip( loc["abilities_button_tooltip_txt"] or "..." )
+			self.passive:SetText( loc["passive_txt"] or "..." )
 			self.passive:SizeToContents()
-			self.jesusmode:SetText( loc["jesusmode_txt"] )
+			self.jesusmode:SetText( loc["jesusmode_txt"] or "..." )
 			self.jesusmode:SizeToContents()
-			self.hideme:SetText( loc["hideme_txt2"] )
+			self.hideme:SetText( loc["hideme_txt2"] or "..." )
 			self.hideme:SizeToContents()
-			self.pigeonmod:SetText( loc["pigeonmod_txt2"] )
+			self.pigeonmod:SetText( loc["pigeonmod_txt2"] or "..." )
 			self.pigeonmod:SizeToContents()
-			self.bonus:SetText( loc["bonus_txt"] )
+			self.bonus:SetText( loc["bonus_txt"] or "..." )
 			self.bonus:SizeToContents()
-			self.bonus_btn:SetText( loc["bonus_btn_txt"] )
+			self.bonus_btn:SetText( loc["bonus_btn_txt"] or "..." )
 			self.bonus_btn:SetSize( Vector2( Render:GetTextWidth( self.bonus_btn:GetText(), 15 ), Render:GetTextHeight( self.bonus:GetText() ) + 15 ) )
 			self.rightlabel:SetWidth( Render:GetTextWidth( self.bonus_btn:GetText(), 15 ) + 50 )
-			self.report_btn:SetText( loc["report_btn_txt"] )
+			self.report_btn:SetText( loc["report_btn_txt"] or "..." )
 			self.report_btn:SetSize( Vector2( 0, Render:GetTextHeight( self.report_btn:GetText(), 14 ) + 10 ) )
 			self.report_btn:SetMargin( Vector2( Render:GetTextWidth( self.report_btn:GetText(), 14 ), 5 ), Vector2( 0, 0 ) )
 		end

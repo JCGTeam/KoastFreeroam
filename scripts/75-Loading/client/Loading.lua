@@ -57,8 +57,9 @@ end
 
 function Load:PostRender()
 	if Game:GetState() == GUIState.Loading then
+		local tip_txt = self.tip_txt or "..."
 		local TxtSizePos = Render.Size.x / 0.55 / Render:GetTextWidth( "BTextResoliton" )
-		local TxtSize = Render:GetTextSize( self.tip_txt, TxtSizePos )
+		local TxtSize = Render:GetTextSize( tip_txt, TxtSizePos )
 		local CircleSize = Vector2( 70, 70 )
 		local TransformOuter = Transform2()
 		local TxtPos = Vector2( ( Render.Size.x/2 ) - ( TxtSize.x/2 ), Render.Size.y / 1.100 )
@@ -76,7 +77,7 @@ function Load:PostRender()
 		if LocalPlayer:GetValue( "SystemFonts" ) then
 			Render:SetFont( AssetLocation.SystemFont, "Impact" )
 		end
-		ExtRender:DrawShadowedText( Pos, self.tip_txt, Color.White, Color.Black, TxtSizePos )
+		ExtRender:DrawShadowedText( Pos, tip_txt, Color.White, Color.Black, TxtSizePos )
 
 		if self.FadeInTimer then
 			TransformOuter:Translate( PosTh )
@@ -106,19 +107,19 @@ function Load:ExitWindow()
 	self.window:SetMinimumSize( Vector2( 500, 200 ) )
 	self.window:SetPositionRel( Vector2( 0.7, 0.5 ) - self.window:GetSizeRel()/2 )
 	self.window:SetVisible( true )
-	self.window:SetTitle( self.warningtitle_txt )
+	self.window:SetTitle( self.warningtitle_txt or "..." )
 	self.window:Subscribe( "WindowClosed", self, self.WindowClosed )
 
 	self.errorText = Label.Create( self.window )
 	self.errorText:SetPosition( Vector2( 20, 30 ) )
 	self.errorText:SetSize( Vector2( 450, 100 ) )
-	self.errorText:SetText( self.warningdescription_txt )
+	self.errorText:SetText( self.warningdescription_txt or "..." )
 	self.errorText:SetTextSize( 20 )
 
 	self.leaveButton = Button.Create( self.window )
 	self.leaveButton:SetSize( Vector2( 100, 40 ) )
 	self.leaveButton:SetDock( GwenPosition.Bottom )
-	self.leaveButton:SetText( self.warningbtn_txt )
+	self.leaveButton:SetText( self.warningbtn_txt or "..."  )
 	self.leaveButton:Subscribe( "Press", self, self.Exit )
 end
 

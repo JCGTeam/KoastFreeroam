@@ -291,7 +291,7 @@ function Bank:Render()
 		col.a = col.a * alpha
 		colS.a = colS.a * alpha
 	
-		ExtRender:DrawShadowedText( pos_2d, self.message .. " | " .. self.submessage, col, cols, self.submessage_size )
+		ExtRender:DrawShadowedText( pos_2d, self.message .. " | " .. self.submessage, col, colS, self.submessage_size )
 	end
 end
 
