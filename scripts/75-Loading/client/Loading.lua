@@ -1,16 +1,9 @@
 class 'Load'
 
 function Load:__init()
-	self.loads = {
-		"BackgroundImage",
-		"BackgroundImageTw",
-		"BackgroundImageTh",
-		"BackgroundImageFo",
-		"BackgroundImageFi",
-		"BackgroundImageSi"
-	}
+	self.maximages = 5
 
-	self.BackgroundImage = Image.Create( AssetLocation.Resource, self.loads[math.random(#self.loads)] )
+	self.BackgroundImage = Image.Create( AssetLocation.Resource, tostring( math.random( 0, self.maximages ) ) )
 	self.LoadingCircle_Outer = Image.Create( AssetLocation.Game, "fe_initial_load_icon_dif.dds" )
 
 	Network:Subscribe( "LoadLocalizationData", function( language )
@@ -51,7 +44,7 @@ function Load:GameLoad()
 end
 
 function Load:LocalPlayerDeath()
-	self.BackgroundImage = Image.Create( AssetLocation.Resource, self.loads[math.random(#self.loads)] )
+	self.BackgroundImage = Image.Create( AssetLocation.Resource, tostring( math.random( 0, self.maximages ) ) )
 	self.FadeInTimer = Timer()
 end
 

@@ -6,11 +6,11 @@
 		"name": "75-Loading"
 	},
 	"resources": {
-		"BackgroundImage": "https://i.imgur.com/T8ZV9Fz.jpg",
-		"BackgroundImageTw": "https://i.imgur.com/R2wFdCC.jpg",
-		"BackgroundImageTh": "https://i.imgur.com/2oBKrz8.jpg",
-		"BackgroundImageFo": "https://i.imgur.com/5MDMOl4.jpg",
-		"BackgroundImageFi": "https://i.imgur.com/320NAIw.jpg",
-		"BackgroundImageSi": "https://i.imgur.com/DUJfKlw.jpg"
+		"0": "https://i.imgur.com/T8ZV9Fz.jpg",
+		"1": "https://i.imgur.com/R2wFdCC.jpg",
+		"2": "https://i.imgur.com/2oBKrz8.jpg",
+		"3": "https://i.imgur.com/5MDMOl4.jpg",
+		"4": "https://i.imgur.com/320NAIw.jpg",
+		"5": "https://i.imgur.com/DUJfKlw.jpg"
 	}
 }
