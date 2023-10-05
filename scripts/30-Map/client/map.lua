@@ -73,8 +73,7 @@ end
 
 function Location:DrawTitle(position, scale)
 	Render:SetFont( AssetLocation.Disk, "Archivo.ttf" )
-	Render:DrawText( position - (Render:GetTextSize(self.name, 21) / 2) + (Vector2.Down * (Location.Icon.Size.y / 2) * scale) + (Vector2.Down * 21 / 2) + Vector2.One, self.name, Color.Black, 21 )
-	Render:DrawText( position - (Render:GetTextSize(self.name, 21) / 2) + (Vector2.Down * (Location.Icon.Size.y / 2) * scale) + (Vector2.Down * 21 / 2), self.name, Color.White, 21 )
+	ExtRender:DrawShadowedText( position - (Render:GetTextSize(self.name, 21) / 2) + (Vector2.Down * (Location.Icon.Size.y / 2) * scale) + (Vector2.Down * 21 / 2), self.name, Color.White, Color.Black, 1 )
 end
 
 Map = {
@@ -582,8 +581,7 @@ function Map:Draw()
 
 				if labels ~= 0 then
 					Render:FillArea( position + Render.Size * 0.003, Vector2( Render:GetTextWidth( str, text_size ), Render:GetTextHeight( str, text_size ) ), Color( 0, 0, 0, 150 ) )
-					Render:DrawText( position + Render.Size * 0.003 + Vector2.One, str, Color.Black, text_size )
-					Render:DrawText( position + Render.Size * 0.003, str, player.col, text_size )
+					ExtRender:DrawShadowedText( position + Render.Size * 0.003, str, player.col, Color.Black, text_size )
 				end
 			end
 		end

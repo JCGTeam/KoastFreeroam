@@ -1,10 +1,10 @@
 class 'ServerMenu'
 
 function ServerMenu:__init()
+	Events:Subscribe( "PostTick", self, self.PostTick )
+
 	Network:Subscribe( "PayDay", self, self.PayDay )
 	Network:Subscribe( "ToggleHideMe", self, self.ToggleHideMe )
-
-	Events:Subscribe( "PostTick", self, self.PostTick )
 
 	self.timer = Timer()
 end

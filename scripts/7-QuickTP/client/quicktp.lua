@@ -225,8 +225,7 @@ RenderMenu = function( args )
 		current  = current + angle
 
 		if animplay then
-			Render:DrawText( coord + Vector2.One, t, Color( 25, 25, 25, 150 ), size )
-			Render:DrawText( coord, t, fontColor, size )
+			ExtRender:DrawShadowedText( coord, t, fontColor, Color( 25, 25, 25, 150 ), size )
 
 			Render:DrawLine(
 				Vector2( math.cos(current) * innerRadius, math.sin(current) * innerRadius) + center, 
@@ -234,8 +233,8 @@ RenderMenu = function( args )
 				menuColor
 			)
 		else
-			Render:DrawText( coord + Vector2.One, t, Color( 25, 25, 25, 150 * alpha ), size )
-			Render:DrawText( coord, t, Color( 255, 255, 255, 255 * alpha ), size )
+			ExtRender:DrawShadowedText( coord, t, Color( 255, 255, 255, 255 * alpha ), Color( 25, 25, 25, 150 * alpha ), size )
+
 			Render:DrawLine(
 				Vector2( math.cos(current) * innerRadius, math.sin(current) * innerRadius) + center, 
 				Vector2( math.cos(current) * drawRad, math.sin(current) * drawRad) + center, 

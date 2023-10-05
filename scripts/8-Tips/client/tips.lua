@@ -45,8 +45,7 @@ function Tips:Render()
 			end
 
 			local textpos = chatPos + Vector2( 1, 11 )
-			Render:DrawText( textpos + Vector2.One, text, Color( 25, 25, 25, 150 ), 14 )
-			Render:DrawText( textpos, text, Color( 215, 215, 215 ), 14 )
+			ExtRender:DrawShadowedText( textpos, text, Color( 215, 215, 215 ), Color( 25, 25, 25, 150 ), 14 )
 		end
 	end
 end

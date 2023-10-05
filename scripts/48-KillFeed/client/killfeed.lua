@@ -214,8 +214,7 @@ function Killfeed:Render( args )
 
 			local shadow_colour = Color( 20, 20, 20, alpha * 0.5 )
 
-			Render:DrawText( pos + Vector2.One, v.message, shadow_colour )
-			Render:DrawText( pos, v.message, Color( 255, 255, 255, alpha ) )
+			ExtRender:DrawShadowedText( pos, v.message, Color( 255, 255, 255, alpha ), shadow_colour )
 
 			local player_colour = v.player_colour
 			player_colour.a = alpha

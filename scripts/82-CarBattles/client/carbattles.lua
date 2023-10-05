@@ -206,13 +206,16 @@ function CarBattles:Render()
 
 	self:RightText( self.yourscorestxt .. self.pts, Render:GetTextHeight( "A" ) * 3.5 + 1, Color( 0, 0, 0 ) )
 	self:RightText( self.leaderboardtxt, Render:GetTextHeight( self.yourscorestxt .. self.pts ) * 5 + 1, Color( 0, 0, 0 ) )
+
 	for i = 1, math.min(#self.scores, 10), 1 do
 		local color = Color( 0, 0, 0 )
 		if self.scores[i].it then color = Color(0, 0, 0) end
 		self:RightText( ""..i..". "..self.scores[i].name..": "..self.scores[i].pts, Render:GetTextHeight( self.leaderboardtxt ) * 5 + 1 + i * 16, color )
 	end
+
 	self:RightText( self.yourscorestxt .. self.pts, Render:GetTextHeight( "A" ) * 3.5, Color( 255, 255, 0 ) )
 	self:RightText( self.leaderboardtxt, Render:GetTextHeight( self.yourscorestxt .. self.pts ) * 5, Color( 255, 255, 0 ) )
+
 	for i = 1, math.min(#self.scores, 10), 1 do
 		local color = Color.White
 		if self.scores[i].it then color = Color( 255, 170, 0 ) end
@@ -226,8 +229,7 @@ function CarBattles:Render()
 --	local text = "До конца игры: " .. self.Time
 --	if self.Time then
 --		local pos = Vector2 ((Render.Size.x / 2) - (Render:GetTextSize(text, 18).x / 2), 30 )
---		Render:DrawText( pos + Vector2.One, tostring( text ), Color.Black, 18 )
---		Render:DrawText( pos, tostring( text ), Color.White, 18 )
+--		ExtRender:DrawShadowedText( pos, tostring( text ), Color.White, Color.Black, 18 )
 --	end
 
 	if self.warning then
@@ -235,13 +237,14 @@ function CarBattles:Render()
 		local text_width = Render:GetTextWidth(text, TextSize.VeryLarge)
 		local text_height = Render:GetTextHeight(text, TextSize.VeryLarge)
 		local pos = Vector2((Render.Width - text_width)/2, (Render.Height - text_height - 200)/2)
-		Render:DrawText( pos + Vector2.One, text, Color( 25, 25, 25, 150 ), TextSize.VeryLarge )
-		Render:DrawText( pos, text, Color.White, TextSize.VeryLarge )
+
+		ExtRender:DrawShadowedText( pos, text, Color.White, Color( 25, 25, 25, 150 ), TextSize.VeryLarge )
+
 		local text = self.nameTw
 		pos.y = pos.y + 45
 		pos.x = (Render.Width - Render:GetTextWidth(text, TextSize.Default))/2
-		Render:DrawText( pos + Vector2.One, text, Color( 25, 25, 25, 150 ), TextSize.Default )
-		Render:DrawText( pos, text, Color.DarkGray, TextSize.Default )
+
+		ExtRender:DrawShadowedText( pos, text, Color.DarkGray, Color( 25, 25, 25, 150 ), TextSize.Default )
 	end
 end
 

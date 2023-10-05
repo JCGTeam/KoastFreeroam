@@ -226,8 +226,7 @@ function Speedometer:DrawShadowedText2( pos, text, colour, size, scale )
 	local shadow_colour = Color( 0, 0, 0, 255 )
 	shadow_colour = shadow_colour * 0.4
 
-	Render:DrawText( pos + Vector2.One, text, shadow_colour, size, scale )
-	Render:DrawText( pos, text, colour, size, scale )
+	ExtRender:DrawShadowedText( pos, text, colour, shadow_colour, size, scale )
 end
 
 function Speedometer:PreTick()

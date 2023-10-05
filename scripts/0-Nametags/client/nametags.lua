@@ -145,10 +145,7 @@ function Nametags:DrawShadowedText( pos, text, colour, scale, alpha )
 	local col = colour
 	col.a = alpha
 
-	Render:DrawText( pos + Vector2.One, text, 
-		Color( 0, 0, 0, alpha * 0.6 ), self.size, scale )
-
-	Render:DrawText( pos, text, col, self.size, scale )
+	ExtRender:DrawShadowedText( pos, text, col, Color( 0, 0, 0, alpha * 0.6 ), self.size, scale )
 end
 
 -- Calculates the alpha for a given distance, bias, maximum and limit
@@ -354,8 +351,7 @@ function Nametags:Render()
 		Render:FillTriangle( Vector2( (Render.Width / 4 - width/1.8 - 10), 0 ), Vector2( (Render.Width / 4 - width/1.8), 0 ), Vector2( (Render.Width / 4 - width/1.8), Render:GetTextHeight( "/hidetag", 18 ) + 2 ), Color( 0, 0, 0, Game:GetSetting(4) * 2.25 / 2.4 ) )
 		Render:FillTriangle( Vector2( (Render.Width / 4 - width/1.8 + Render:GetTextWidth( "/hidetag", 18 ) + 15), 0 ), Vector2( (Render.Width / 4 - width/1.8 + Render:GetTextWidth( "/hidetag", 18 ) + 5), 0 ), Vector2( (Render.Width / 4 - width/1.8 + Render:GetTextWidth( "/hidetag", 18 ) + 5 ), Render:GetTextHeight( "/hidetag", 18 ) + 2 ), Color( 0, 0, 0, Game:GetSetting(4) * 2.25 / 2.4 ) )
 
-		Render:DrawText( textpos + Vector2.One, "/hidetag", Color.Black, 18 )
-		Render:DrawText( textpos, "/hidetag", Color.LightBlue, 18 )
+		ExtRender:DrawShadowedText( textpos, "/hidetag", Color.LightBlue, Color.Black, 18 )
 	end
 
 	-- Create some prerequisite variables

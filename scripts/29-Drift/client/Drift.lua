@@ -88,8 +88,7 @@ function Drift:Render()
 				local record = object:GetValue("S")
 				local text = self.tWidg
 				local position = Vector2( 20, Render.Height * 0.4 )
-				Render:DrawText( position + Vector2.One, text, Color( 25, 25, 25, Game:GetSetting(4) * 2.25 ), 15 )
-				Render:DrawText( position, text, Color( 255, 255, 255, Game:GetSetting(4) * 2.25 ), 15 )
+				ExtRender:DrawShadowedText( position, text, Color( 255, 255, 255, Game:GetSetting(4) * 2.25 ), Color( 25, 25, 25, Game:GetSetting(4) * 2.25 ), 15 )
 				Render:DrawText( position + Vector2( Render:GetTextWidth( self.tWidgTw, 15 ), 0 ), self.tDrift, Color( 255, 165, 0, Game:GetSetting(4) * 2.25 ), 15 )
 
 				local bar_pos = position
@@ -112,8 +111,7 @@ function Drift:Render()
 					for i = 1, object:GetValue("E") do text = text .. ">" end
 					position.y = position.y + height * 0.95
 					Render:SetFont( AssetLocation.Disk, "LeagueGothic.ttf" )
-					Render:DrawText( position + Vector2.One, text, Color( 25, 25, 25, Game:GetSetting(4) * 2.25 ), 13 )
-					Render:DrawText( position, text, Color( 255, 255, 255, Game:GetSetting(4) * 2.25 ), 13 )
+					ExtRender:DrawShadowedText( position, text, Color( 255, 255, 255, Game:GetSetting(4) * 2.25 ), Color( 25, 25, 25, Game:GetSetting(4) * 2.25 ), 13 )
 					Render:ResetFont()
 					if LocalPlayer:GetValue( "SystemFonts" ) then
 						Render:SetFont( AssetLocation.SystemFont, "Impact" )
@@ -124,19 +122,16 @@ function Drift:Render()
 							position.y = position.y + height * 0.6
 							local alpha = math.min(self.attempt[3], 1)
 							text = tostring( self.attempt[1] ) .. " - " .. player:GetName()
-							Render:DrawText( position + Vector2.One, text, Color( 25, 25, 25, 150 * alpha ), 16 )
-							Render:DrawText( position, text, Color( 255, 255, 255, 255 * alpha ), 16 )
+							ExtRender:DrawShadowedText( position, text, Color( 255, 255, 255, 255 * alpha ), Color( 25, 25, 25, 150 * alpha ), 16 )
 							text = tostring( self.attempt[1] )
-							Render:DrawText( position + Vector2.One, text, Color( 25, 25, 25, 150 * alpha ), 16 )
-							Render:DrawText( position, text, Color( 240, 220, 70, 255 * alpha ), 16 )
+							ExtRender:DrawShadowedText( position, text, Color( 240, 220, 70, 255 * alpha ), Color( 25, 25, 25, 150 * alpha ), 16 )
 							self.attempt[3] = self.attempt[3] - 0.02
 							if self.attempt[3] < 0.02 then self.attempt = nil end
 						end
 					end
 				else
 					text = "–"
-					Render:DrawText( position + Vector2.One, text, Color( 25, 25, 25, Game:GetSetting(4) * 2.25 ), 16 )
-					Render:DrawText( position, text, Color( 200, 200, 200, Game:GetSetting(4) * 2.25 ), 16 )
+					ExtRender:DrawShadowedText( position, text, Color( 200, 200, 200, Game:GetSetting(4) * 2.25 ), Color( 25, 25, 25, Game:GetSetting(4) * 2.25 ), 16 )
 				end
 			end
 		end
@@ -214,8 +209,7 @@ function Drift:Render()
 
 			Render:DrawText( position + Vector2.One, text, Color( 25, 25, 25, 150 * alpha ), self.textSize )
 
-			Render:DrawText( position_mult + Vector2.One, text_mult, Color( 25, 25, 25, 150 * alpha), self.textSize )
-			Render:DrawText( position_mult, text_mult, Color( 255, 150, 0, 255 * alpha ), self.textSize )
+			ExtRender:DrawShadowedText( position_mult, text_mult, Color( 255, 150, 0, 255 * alpha ), Color( 25, 25, 25, 150 * alpha ), self.textSize )
 			if object and (math.ceil(self.score * self.multipler) > (object:GetValue("S") or 0)) then
 				Render:DrawText( position, text, Color( 255, 0, 0, 255 * alpha ), self.textSize )
 			else
@@ -336,8 +330,7 @@ function Drift:Render()
 			end
 		end
 		Render:DrawText( position + Vector2( Render:GetTextWidth(btext,self.textSize), 0 ), tostring( math.ceil(self.score*self.multipler) ), Color( 255, 255, 255 ), self.textSize )
-		Render:DrawText( position_mult + Vector2.One, text_mult, Color( 25, 25, 25, 150 ), self.textSize )
-		Render:DrawText( position_mult, text_mult, Color( 255, 150, 0, 255 ), self.textSize )
+		ExtRender:DrawShadowedText( position_mult, text_mult, Color( 255, 150, 0, 255 ), Color( 25, 25, 25, 150 ), self.textSize )
 	end
 end
 

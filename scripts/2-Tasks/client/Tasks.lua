@@ -487,8 +487,7 @@ function Tasks:Render()
 		local text = self.target .. self.delivto .. self.job.description
 
 		textPos = textPos - Vector2( Render:GetTextWidth( text ) / 2, 0 )
-		Render:DrawText( textPos + Vector2.One, text, Color( 0, 0, 0, 80 ) )
-		Render:DrawText( textPos, text, Color( 192, 255, 192 ) )
+		ExtRender:DrawShadowedText( textPos, text, Color( 192, 255, 192 ), Color( 0, 0, 0, 80 ) )
 
 		local destPos = self.locations[self.job.destination].position
 		local destDist = Vector3.Distance( destPos, LocalPlayer:GetPosition() )

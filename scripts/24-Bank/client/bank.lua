@@ -291,8 +291,7 @@ function Bank:Render()
 		col.a = col.a * alpha
 		colS.a = colS.a * alpha
 	
-		Render:DrawText( pos_2d + Vector2.One, self.message .. " | " .. self.submessage, colS, self.submessage_size )
-		Render:DrawText( pos_2d, self.message .. " | " .. self.submessage, col, self.submessage_size )
+		ExtRender:DrawShadowedText( pos_2d, self.message .. " | " .. self.submessage, col, cols, self.submessage_size )
 	end
 end
 

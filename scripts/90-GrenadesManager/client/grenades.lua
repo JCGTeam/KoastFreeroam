@@ -336,6 +336,7 @@ function Grenades:Render()
 		if Game:GetSetting(4) >= 1 then
 			imga:SetPosition( pos_2d )
 			imga:SetAlpha( 201 - Game:GetSetting(4) * 2 )
+
 			self.background:SetPosition( pos_2d_a )
 			self.background:SetAlpha( 201 - Game:GetSetting(4) * 2 )
 			self.textb:SetPosition( pos_2d_t )
@@ -343,16 +344,12 @@ function Grenades:Render()
 
 			self.textb:Draw()
 			self.background:Draw()
+
 			imga:Draw()
 
-			Render:DrawText( pos_2d_text + Vector2.One, text, Color( 0, 0, 0, Game:GetSetting(4) * 2.25 ), self.textb:GetSize().y/0.018 / Render:GetTextWidth( "BTextResoliton" ) )
-			Render:DrawText( pos_2d_text, text, Color( 255, 255, 255, Game:GetSetting(4) * 2.25 ), self.textb:GetSize().y/0.018 / Render:GetTextWidth( "BTextResoliton" ) )
-
-			Render:DrawText( pos_2d_timer, timer_text, Color( 0, 0, 0, Game:GetSetting(4) * 2.25 ), imga:GetSize().y/0.13 / Render:GetTextWidth( "00" ) )
-			Render:DrawText( pos_2d_timer, timer_text, Color( 255, 255, 255, Game:GetSetting(4) * 2.25 ), imga:GetSize().y/0.13 / Render:GetTextWidth( "00" ) )
-
-			Render:DrawText( pos_2d_c4max, max_text, Color( 0, 0, 0, Game:GetSetting(4) * 2.25 ), imga:GetSize().y/0.18 / Render:GetTextWidth( "00" ) )
-			Render:DrawText( pos_2d_c4max, max_text, Color( 169, 169, 169, Game:GetSetting(4) * 2.25 ), imga:GetSize().y/0.18 / Render:GetTextWidth( "00" ) )
+			ExtRender:DrawShadowedText( pos_2d_text, text, Color( 255, 255, 255, Game:GetSetting(4) * 2.25 ), Color( 0, 0, 0, Game:GetSetting(4) * 2.25 ), self.textb:GetSize().y/0.018 / Render:GetTextWidth( "BTextResoliton" ) )
+			ExtRender:DrawShadowedText( pos_2d_timer, timer_text, Color( 255, 255, 255, Game:GetSetting(4) * 2.25 ), Color( 0, 0, 0, Game:GetSetting(4) * 2.25 ), imga:GetSize().y/0.13 / Render:GetTextWidth( "00" ) )
+			ExtRender:DrawShadowedText( pos_2d_c4max, max_text, Color( 169, 169, 169, Game:GetSetting(4) * 2.25 ), Color( 0, 0, 0, Game:GetSetting(4) * 2.25 ), imga:GetSize().y/0.18 / Render:GetTextWidth( "00" ) )
 		end
 	end
 end

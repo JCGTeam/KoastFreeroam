@@ -76,8 +76,7 @@ function Load:PostRender()
 		if LocalPlayer:GetValue( "SystemFonts" ) then
 			Render:SetFont( AssetLocation.SystemFont, "Impact" )
 		end
-		Render:DrawText( PosTw, self.tip_txt, Color( 0, 0, 0 ), TxtSizePos )
-		Render:DrawText( Pos, self.tip_txt, Color.White, TxtSizePos )
+		ExtRender:DrawShadowedText( Pos, self.tip_txt, Color.White, Color.Black, TxtSizePos )
 
 		if self.FadeInTimer then
 			TransformOuter:Translate( PosTh )

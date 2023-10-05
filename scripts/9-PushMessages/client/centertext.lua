@@ -11,13 +11,15 @@ function CenterText:CastCenterText( args )
 	self.timeF = args.time
     self.color = args.color
     self.size = 30
+
     if not self.RenderEvent then
         self.RenderEvent = Events:Subscribe( "Render", self, self.Render )
     end
 end
 
 function CenterText:Render( args )
-	if Game:GetState() ~= GUIState.Game then return end	
+	if Game:GetState() ~= GUIState.Game then return end
+
 	if self.timerF and self.textF then
 		local alpha = 4
 
@@ -44,8 +46,7 @@ function CenterText:Render( args )
         colS = Copy( Color( 0, 0, 0, 80 ) )
         colS.a = colS.a * alpha	
 
-        Render:DrawText( pos + Vector2.One, self.textF, colS, self.size )
-        Render:DrawText( pos, self.textF, col, self.size )
+        ExtRender:DrawShadowedText( pos, self.textF, col, colS, self.size )
 	end
 end
 

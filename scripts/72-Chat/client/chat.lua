@@ -270,8 +270,7 @@ function BetterChat:Render()
 
 		self.chatmodelist:SetPosition( Vector2( textpos.x + Render:GetTextWidth( self.chatmode_txt, 14 ) + 1, textpos.y - Render:GetTextHeight( self.chatmode_txt, 14 ) / 5 ) )
 
-		Render:DrawText( textpos + Vector2.One, self.chatmode_txt, Color( 25, 25, 25, 150 ), 14 )
-		Render:DrawText( textpos, self.chatmode_txt, Color( 215, 215, 215 ), 14 )
+		ExtRender:DrawShadowedText( textpos, self.chatmode_txt, Color( 215, 215, 215 ), Color( 25, 25, 25, 150 ), 14 )
 
 		if not self.chatactive then
 			self.chatmodelist:Clear()
