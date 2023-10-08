@@ -3,13 +3,14 @@ class 'Tips'
 function Tips:__init()
 	self.active = true
 
-	Network:Subscribe( "LoadLocalizationData", function( language )
-		local loc = language
+	self:Lang()
 
-		self.tip_txt = loc["tip_txt"] or "..."
-	end )
-
+	Events:Subscribe( "Lang", self, self.Lang )
 	Events:Subscribe( "Render", self, self.Render )
+end
+
+function Tips:Lang()
+	self.loc = _G[LocalPlayer:GetValue( "Lang" )] or EN
 end
 
 function Tips:Render()
@@ -25,12 +26,11 @@ function Tips:Render()
 	end
 
 	if Chat:GetEnabled() and Chat:GetUserEnabled() and not Chat:GetActive() then
-		local text = self.tip_txt or "..."
-		local text_width = Render:GetTextWidth( text )
+		local text_width = Render:GetTextWidth( self.loc.tip_txt )
 		local chatPos = Chat:GetPosition()
 
 		if LocalPlayer:GetValue( "ChatBackgroundVisible" ) then
-			Render:FillArea( chatPos + Vector2( -4, 0 ), Vector2( 508, - Render:GetTextHeight( text ) * 13.5 ), Color( 0, 0, 0, 80 ) )
+			Render:FillArea( chatPos + Vector2( -4, 0 ), Vector2( 508, - Render:GetTextHeight( self.loc.tip_txt ) * 13.5 ), Color( 0, 0, 0, 80 ) )
 		end
 
 		if LocalPlayer:GetValue( "ChatTipsVisible" ) then
@@ -45,7 +45,7 @@ function Tips:Render()
 			end
 
 			local textpos = chatPos + Vector2( 1, 11 )
-			ExtRender:DrawShadowedText( textpos, text, Color( 215, 215, 215 ), Color( 25, 25, 25, 150 ), 14 )
+			ExtRender:DrawShadowedText( textpos, self.loc.tip_txt, Color( 215, 215, 215 ), Color( 25, 25, 25, 150 ), 14 )
 		end
 	end
 end

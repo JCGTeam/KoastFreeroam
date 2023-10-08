@@ -9,52 +9,50 @@ function Menu:__init()
 	self.upgrade = true
 	self.hider = true
 
-	self.sbar = Color.Gold
-
 	self.active = true
 
 	self.tofreeroamtext = "Добро пожаловать в свободный режим!"
 	self.tName = "ВЫБЕРИТЕ ЯЗЫК / LANGUAGE SELECT"
 
-	self.rus_image = ImagePanel.Create()
-	self.rus_image:SetImage( self.rusflag )
-	self.rus_image:SetPosition( Vector2( Render.Size.x / 3.5, Render.Size.y - Render.Size.x / 3.5 ) )
-	self.rus_image:SetSize( Vector2( Render.Size.x / 5.5, Render.Size.x / 9 ) )
-	self.rus_image:SetVisible( false )
+	self.ru_img = ImagePanel.Create()
+	self.ru_img:SetImage( self.rusflag )
+	self.ru_img:SetPosition( Vector2( Render.Size.x / 3.5, Render.Size.y - Render.Size.x / 3.5 ) )
+	self.ru_img:SetSize( Vector2( Render.Size.x / 5.5, Render.Size.x / 9 ) )
+	self.ru_img:SetVisible( false )
 
-	self.rus_button = MenuItem.Create()
+	self.ru_btn = MenuItem.Create()
 	if LocalPlayer:GetValue( "SystemFonts" ) then
-		self.rus_button:SetFont( AssetLocation.SystemFont, "Impact" )
+		self.ru_btn:SetFont( AssetLocation.SystemFont, "Impact" )
 	end
-	self.rus_button:SetSize( Vector2( Render.Size.x / 5.5, Render.Size.x / 7 ) )
-	self.rus_button:SetPosition( self.rus_image:GetPosition() )
-	self.rus_button:SetText( "Русский [RU]" )
-	self.rus_button:SetToolTip( "You can help translate Koast Freeroam into " .. self.rus_button:GetText() .. "\nLink: crowdin.com/project/jc2mp-koast-freeroam" )
-	self.rus_button:SetTextPadding( Vector2( 0, Render.Size.x / 9 ), Vector2.Zero )
-	self.rus_button:SetTextSize( Render.Size.x / 0.75 / Render:GetTextWidth( "BTextResoliton" ) )
+	self.ru_btn:SetSize( Vector2( Render.Size.x / 5.5, Render.Size.x / 7 ) )
+	self.ru_btn:SetPosition( self.ru_img:GetPosition() )
+	self.ru_btn:SetText( "Русский [RU]" )
+	self.ru_btn:SetToolTip( "You can help translate Koast Freeroam into " .. self.ru_btn:GetText() .. "\nLink: crowdin.com/project/jc2mp-koast-freeroam" )
+	self.ru_btn:SetTextPadding( Vector2( 0, Render.Size.x / 9 ), Vector2.Zero )
+	self.ru_btn:SetTextSize( Render.Size.x / 0.75 / Render:GetTextWidth( "BTextResoliton" ) )
 	if LocalPlayer:GetMoney() <= 0.5 then
-		self.rus_button:Subscribe( "Press", self, self.Welcome )
+		self.ru_btn:Subscribe( "Press", self, self.Welcome )
 	else
-		self.rus_button:Subscribe( "Press", self, self.Rus )
+		self.ru_btn:Subscribe( "Press", function() self:Select( "RU" ) end )
 	end
 
-	self.eng_image = ImagePanel.Create()
-	self.eng_image:SetImage( self.engflag )
-	self.eng_image:SetPosition( Vector2( self.rus_button:GetPosition().x + Render.Size.x / 4.8, self.rus_button:GetPosition().y ) )
-	self.eng_image:SetSize( Vector2( Render.Size.x / 5.5, Render.Size.x / 9 ) )
-	self.eng_image:SetVisible( false )
+	self.en_img = ImagePanel.Create()
+	self.en_img:SetImage( self.engflag )
+	self.en_img:SetPosition( Vector2( self.ru_btn:GetPosition().x + Render.Size.x / 4.8, self.ru_btn:GetPosition().y ) )
+	self.en_img:SetSize( Vector2( Render.Size.x / 5.5, Render.Size.x / 9 ) )
+	self.en_img:SetVisible( false )
 
-	self.eng_button = MenuItem.Create()
+	self.en_btn = MenuItem.Create()
 	if LocalPlayer:GetValue( "SystemFonts" ) then
-		self.eng_button:SetFont( AssetLocation.SystemFont, "Impact" )
+		self.en_btn:SetFont( AssetLocation.SystemFont, "Impact" )
 	end
-	self.eng_button:SetSize( Vector2( Render.Size.x / 5.5, Render.Size.x / 7 ) )
-	self.eng_button:SetPosition( self.eng_image:GetPosition() )
-	self.eng_button:SetText( "English [EN]" )
-	self.eng_button:SetToolTip( "You can help translate Koast Freeroam into " .. self.eng_button:GetText() .. "\nLink: crowdin.com/project/jc2mp-koast-freeroam" )
-	self.eng_button:SetTextPadding( Vector2( 0, Render.Size.x / 9 ), Vector2.Zero )
-	self.eng_button:SetTextSize( Render.Size.x / 0.75 / Render:GetTextWidth( "BTextResoliton" ) )
-	self.eng_button:Subscribe( "Press", self, self.Eng )
+	self.en_btn:SetSize( Vector2( Render.Size.x / 5.5, Render.Size.x / 7 ) )
+	self.en_btn:SetPosition( self.en_img:GetPosition() )
+	self.en_btn:SetText( "English [EN]" )
+	self.en_btn:SetToolTip( "You can help translate Koast Freeroam into " .. self.en_btn:GetText() .. "\nLink: crowdin.com/project/jc2mp-koast-freeroam" )
+	self.en_btn:SetTextPadding( Vector2( 0, Render.Size.x / 9 ), Vector2.Zero )
+	self.en_btn:SetTextSize( Render.Size.x / 0.75 / Render:GetTextWidth( "BTextResoliton" ) )
+	self.en_btn:Subscribe( "Press", function() self:Select( "EN" ) end )
 
 	Console:Subscribe( "misload", self, self.Mission )
 
@@ -65,10 +63,12 @@ function Menu:__init()
 	self.ModuleLoadEvent = Events:Subscribe( "ModuleLoad", self, self.ModuleLoad )
 	self.LocalPlayerInputEvent = Events:Subscribe( "LocalPlayerInput", self, self.LocalPlayerInput )
 	self.ModuleUnloadEvent = Events:Subscribe( "ModuleUnload", self, self.ModuleUnload )
+	self.SelectedNetwork = Network:Subscribe( "Selected", self, self.Selected )
 end
 
 function Menu:Mission( args )
 	if LocalPlayer:GetWorld() ~= DefaultWorld then return end
+
 	if tonumber(args.text) == 1 then
 		print( "Start msy.km01.completed" )
 		print( "Please wait..." )
@@ -101,25 +101,25 @@ function Menu:GameLoad()
 end
 
 function Menu:ResolutionChange( args )
-	self.rus_image:SetPosition( Vector2( args.size.x / 3.5, (args.size.y - args.size.x / 3.5 ) ) )
-	self.rus_image:SetSize( Vector2( args.size.x / 5.5, args.size.x / 9 ) )
+	self.ru_img:SetPosition( Vector2( args.size.x / 3.5, (args.size.y - args.size.x / 3.5 ) ) )
+	self.ru_img:SetSize( Vector2( args.size.x / 5.5, args.size.x / 9 ) )
 
-	self.rus_button:SetSize( Vector2( args.size.x / 5.5, args.size.x / 7 ) )
-	self.rus_button:SetPosition( self.rus_image:GetPosition() )
-	self.rus_button:SetTextPadding( Vector2( 0, args.size.x / 9 ), Vector2.Zero )
-	self.rus_button:SetTextSize( args.size.x / 0.75 / Render:GetTextWidth( "BTextResoliton" ) )
+	self.ru_btn:SetSize( Vector2( args.size.x / 5.5, args.size.x / 7 ) )
+	self.ru_btn:SetPosition( self.ru_img:GetPosition() )
+	self.ru_btn:SetTextPadding( Vector2( 0, args.size.x / 9 ), Vector2.Zero )
+	self.ru_btn:SetTextSize( args.size.x / 0.75 / Render:GetTextWidth( "BTextResoliton" ) )
 
-	self.eng_image:SetPosition( Vector2( self.rus_button:GetPosition().x + args.size.x / 4.8, self.rus_button:GetPosition().y ) )
-	self.eng_image:SetSize( Vector2( args.size.x / 5.5, args.size.x / 9 ) )
+	self.en_img:SetPosition( Vector2( self.ru_btn:GetPosition().x + args.size.x / 4.8, self.ru_btn:GetPosition().y ) )
+	self.en_img:SetSize( Vector2( args.size.x / 5.5, args.size.x / 9 ) )
 
-	self.eng_button:SetSize( Vector2( args.size.x / 5.5, args.size.x / 7 ) )
-	self.eng_button:SetPosition( self.eng_image:GetPosition() )
-	self.eng_button:SetTextPadding( Vector2( 0, args.size.x / 9 ), Vector2.Zero )
-	self.eng_button:SetTextSize( args.size.x / 0.75 / Render:GetTextWidth( "BTextResoliton" ) )
+	self.en_btn:SetSize( Vector2( args.size.x / 5.5, args.size.x / 7 ) )
+	self.en_btn:SetPosition( self.en_img:GetPosition() )
+	self.en_btn:SetTextPadding( Vector2( 0, args.size.x / 9 ), Vector2.Zero )
+	self.en_btn:SetTextSize( args.size.x / 0.75 / Render:GetTextWidth( "BTextResoliton" ) )
 end
 
 function Menu:LocalPlayerWorldChange( args )
-	self:Close()
+	self:SetActive( false )
 end
 
 function Menu:ModuleLoad()
@@ -139,10 +139,6 @@ end
 
 function Menu:LocalPlayerInput( args )
 	return false
-end
-
-function Menu:GetActive()
-	return self.active
 end
 
 function Menu:SetActive( active )
@@ -184,8 +180,10 @@ function Menu:SetActive( active )
 			end
 
 			self:CleanUp()
+
 			Game:FireEvent( "gui.hud.show" )
 			Chat:SetEnabled( true )
+
 			local sound = ClientSound.Create(AssetLocation.Game, {
 						bank_id = 35,
 						sound_id = 6,
@@ -196,6 +194,7 @@ function Menu:SetActive( active )
 			sound:SetParameter(0,0.75)
 			sound:SetParameter(1,0)
 		end
+
 		self.active = active
 		Mouse:SetVisible( self.active )
     end
@@ -213,19 +212,19 @@ function Menu:Render()
 
 	if self.hider then
 		if Game:GetState() ~= GUIState.Loading then
-			self.rus_image:SetVisible( true )
-			self.rus_button:SetVisible( true )
-			self.eng_image:SetVisible( true )
-			self.eng_button:SetVisible( true )
+			self.ru_img:SetVisible( true )
+			self.ru_btn:SetVisible( true )
+			self.en_img:SetVisible( true )
+			self.en_btn:SetVisible( true )
 			if LocalPlayer:GetValue( "SystemFonts" ) then
-				self.rus_button:SetFont( AssetLocation.SystemFont, "Impact" )
-				self.eng_button:SetFont( AssetLocation.SystemFont, "Impact" )
+				self.ru_btn:SetFont( AssetLocation.SystemFont, "Impact" )
+				self.en_btn:SetFont( AssetLocation.SystemFont, "Impact" )
 			end
 		else
-			self.rus_image:SetVisible( false )
-			self.rus_button:SetVisible( false )
-			self.eng_image:SetVisible( false )
-			self.eng_button:SetVisible( false )
+			self.ru_img:SetVisible( false )
+			self.ru_btn:SetVisible( false )
+			self.en_img:SetVisible( false )
+			self.en_btn:SetVisible( false )
 		end
 	end
 
@@ -257,12 +256,9 @@ function Menu:Render()
 	end
 end
 
-function Menu:Close()
-	self:SetActive( false )
-end
-
 function Menu:Freeroam()
-	self:Close()
+	self:SetActive( false )
+
 	Game:FireEvent( "ply.unpause" )
 	if LocalPlayer:GetValue( "Passive" ) then
 		Game:FireEvent( "ply.invulnerable" )
@@ -289,24 +285,24 @@ function Menu:Welcome()
 	self.hider = false
 	self:SetActive( false )
 
-	if self.rus_image then
-		self.rus_image:Remove()
-		self.rus_image = nil
+	if self.ru_img then
+		self.ru_img:Remove()
+		self.ru_img = nil
 	end
 
-	if self.rus_button then
-		self.rus_button:Remove()
-		self.rus_button = nil
+	if self.ru_btn then
+		self.ru_btn:Remove()
+		self.ru_btn = nil
 	end
 
-	if self.eng_image then
-		self.eng_image:Remove()
-		self.eng_image = nil
+	if self.en_img then
+		self.en_img:Remove()
+		self.en_img = nil
 	end
 
-	if self.eng_button then
-		self.eng_button:Remove()
-		self.eng_button = nil
+	if self.en_btn then
+		self.en_btn:Remove()
+		self.en_btn = nil
 	end
 
 	local sound = ClientSound.Create(AssetLocation.Game, {
@@ -320,66 +316,71 @@ function Menu:Welcome()
 end
 
 function Menu:Selected()
+	if LocalPlayer:GetValue( "Lang" ) == "RU" then
+		local type = 0
+
+		if type == 0 then
+			Events:Fire( "OpenWhatsNew", { titletext = "СТАНЬТЕ СПОНСОРОМ СЕРВЕРА", text = "Задонатьте более, чем 500 рублей для попадания в список спонсоров!\nСпонсируя сервер и его автора, вы мотивируете и продлеваете жизнь проекту ( и не только ).\n \nСсылки:\n> Донат - https://cclx.win/FGXd0\n> Discord - https://cclx.win/NFXd0\n> Telegram - t.me/rusjc\n \nС помощью доната, вы также можете приобрести какую-либо услугу на сервере или привилегию.", usepause = true } )
+		elseif type == 1 then
+			Events:Fire( "OpenWhatsNew", { titletext = "РАЗ И НАВСЕГДА ( ͡° ͜ʖ ͡°)", text = "Успейте приобрести VIP навсегда за 50 рублей!\nАкция действует до 16-го апреля.\n \nСсылки:\n> Донат - https://cclx.win/FGXd0\n> Discord - https://cclx.win/NFXd0\n> Telegram - t.me/rusjc\n\nСписок возможностей для VIP перечислен в меню помощи.", usepause = true } )
+		elseif type == 2 then
+			Events:Fire( "OpenWhatsNew", { titletext = "ПОДДЕРЖКА СООБЩЕСТВА", text = "Создавайте контент с участием нашего сервера, а мы будем продвигать вас!\n      Подробности о поддержке сообщества сможете найти в меню помощи.", usepause = true } )
+		end
+	elseif LocalPlayer:GetValue( "Lang" ) == "EN" then
+		Events:Fire( "EngHelp" )
+
+		self.tofreeroamtext = "Welcome to freeroam mode!"
+
+		--Events:Fire( "OpenWhatsNew", { titletext = "SPONSOR THE SERVER", text = "Donate more than 6,16$ to be in the list of sponsors!\nBy sponsoring the server and its author, you motivate and prolong the life of the project (and not only).\n \nLinks:\n> Donate - https://cclx.win/FGXd0\n> Discord - https://cclx.win/NFXd0\n> Telegram - t.me/rusjc\n \nWith donation, you can also buy some service on the server or a privilege.", usepause = true } )
+	end
+
 	Network:Send( "JoinMessage" )
 	self.hider = false
 
-	if self.rus_image then
-		self.rus_image:Remove()
-		self.rus_image = nil
+	if self.ru_img then
+		self.ru_img:Remove()
+		self.ru_img = nil
 	end
 
-	if self.rus_button then
-		self.rus_button:Remove()
-		self.rus_button = nil
+	if self.ru_btn then
+		self.ru_btn:Remove()
+		self.ru_btn = nil
 	end
 
-	if self.eng_image then
-		self.eng_image:Remove()
-		self.eng_image = nil
+	if self.en_img then
+		self.en_img:Remove()
+		self.en_img = nil
 	end
 
-	if self.eng_button then
-		self.eng_button:Remove()
-		self.eng_button = nil
+	if self.en_btn then
+		self.en_btn:Remove()
+		self.en_btn = nil
 	end
 
 	self:Freeroam()
+
+	Events:Fire( "Lang" )
+
+	if self.SelectedNetwork then
+		Network:Unsubscribe( self.SelectedNetwork )
+		self.SelectedNetwork = nil
+	end
+end
+
+function Menu:Select( selected_lang )
+	Network:Send( "Initialization", { lang = selected_lang } )
+
 	local sound = ClientSound.Create(AssetLocation.Game, {
-				bank_id = 18,
-				sound_id = 1,
-				position = Camera:GetPosition(),
-				angle = Angle()
+		bank_id = 18,
+		sound_id = 1,
+		position = Camera:GetPosition(),
+		angle = Angle()
 	})
 
 	sound:SetParameter(0,1)
-end
 
-function Menu:Rus()
-	Network:Send( "SetRus" )
-
-	local type = 0
-
-	if type == 0 then
-		Events:Fire( "OpenWhatsNew", { titletext = "СТАНЬТЕ СПОНСОРОМ СЕРВЕРА", text = "Задонатьте более, чем 500 рублей для попадания в список спонсоров!\nСпонсируя сервер и его автора, вы мотивируете и продлеваете жизнь проекту ( и не только ).\n \nСсылки:\n> Донат - https://cclx.win/FGXd0\n> Discord - https://cclx.win/NFXd0\n> Telegram - t.me/rusjc\n \nС помощью доната, вы также можете приобрести какую-либо услугу на сервере или привилегию.", usepause = true } )
-	elseif type == 1 then
-		Events:Fire( "OpenWhatsNew", { titletext = "РАЗ И НАВСЕГДА ( ͡° ͜ʖ ͡°)", text = "Успейте приобрести VIP навсегда за 50 рублей!\nАкция действует до 16-го апреля.\n \nСсылки:\n> Донат - https://cclx.win/FGXd0\n> Discord - https://cclx.win/NFXd0\n> Telegram - t.me/rusjc\n\nСписок возможностей для VIP перечислен в меню помощи.", usepause = true } )
-	elseif type == 2 then
-		Events:Fire( "OpenWhatsNew", { titletext = "ПОДДЕРЖКА СООБЩЕСТВА", text = "Создавайте контент с участием нашего сервера, а мы будем продвигать вас!\n      Подробности о поддержке сообщества сможете найти в меню помощи.", usepause = true } )
-	end
-	self:Selected()
-end
-
-function Menu:Eng()
-	Events:Fire( "SetEng" )
-	Network:Send( "SetEng" )
-
-	self.tofreeroamtext = "Welcome to freeroam mode!"
-
-	Events:Fire( "EngHelp" )
-	Events:Fire( "Lang" )
-
-	--Events:Fire( "OpenWhatsNew", { titletext = "SPONSOR THE SERVER", text = "Donate more than 6,16$ to be in the list of sponsors!\nBy sponsoring the server and its author, you motivate and prolong the life of the project (and not only).\n \nLinks:\n> Donate - https://cclx.win/FGXd0\n> Discord - https://cclx.win/NFXd0\n> Telegram - t.me/rusjc\n \nWith donation, you can also buy some service on the server or a privilege.", usepause = true } )
-	self:Selected()
+	self.en_btn:SetEnabled( false )
+	self.ru_btn:SetEnabled( false )
 end
 
 menu = Menu()

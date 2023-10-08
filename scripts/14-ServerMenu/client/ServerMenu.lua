@@ -31,7 +31,7 @@ function ServerMenu:__init()
     }
 
 	self.active = false
-	self.resizer_txt = "Черный асужда"
+	self.resizer_txt = "Черный асуууу"
 	self.resizer_txt2 = "Отклюючиить"
 
 	self.cooldown = 0.5
@@ -47,72 +47,60 @@ function ServerMenu:__init()
 	self.abiltiesimage = Image.Create( AssetLocation.Resource, "AbilitiesICO" )
 
 	self:LoadCategories()
+	self:Lang()
 
+	Events:Subscribe( "Lang", self, self.Lang )
     Events:Subscribe( "KeyUp", self, self.KeyUp )
 	Events:Subscribe( "LocalPlayerInput", self, self.LocalPlayerInput )
 	Events:Subscribe( "LocalPlayerMoneyChange", self, self.LocalPlayerMoneyChange )
 
 	Network:Subscribe( "Settings", self, self.Open )
 	Network:Subscribe( "Bonus", self, self.Bonus )
+end
 
-	Network:Subscribe( "LoadLocalizationData", function( language )
-		local loc = language
+function ServerMenu:Lang()
+	self.loc = _G[LocalPlayer:GetValue( "Lang" )] or EN
 
-		self.pigeonmod_txt = loc["pigeonmod_txt"] or "..."
-		self.hideme_txt = loc["hideme_txt"] or "..."
-		self.disabled_txt = loc["disabled_txt"] or "..."
-		self.enabled_txt = loc["enabled_txt"] or "..."
-		self.disable_txt_2 = loc["disable_txt_2"] or "..."
-		self.enable_txt_2 = loc["enable_txt_2"] or "..."
-		self.gametime_txt = loc["gametime_txt"] or "..."
-		self.gametime:SizeToContents()
-		self.balance_txt = loc["balance_txt"] or "..."
-		self.bonustag_txt = loc["bonustag_txt"] or "..."
-		self.moneybonusavailable_txt = loc["moneybonusavailable_txt"] or "..."
-		self.enable_txt = loc["enable_txt"] or "..."
-		self.disable_txt = loc["disable_txt"] or "..."
-		self.moneybonus_txt = loc["moneybonus_txt"] or "..."
-		self.moneybonusnotavailable_txt = loc["moneybonusnotavailable_txt"] or "..."
+	self.gametime:SizeToContents()
 
-		if self.window then
-			self.window:SetTitle( loc["servermenutitle_txt"] or "..." )
-			self.news_button:SetText( loc["news_button_txt"] or "..." )
-			self.news_button:SetWidth( Render:GetTextWidth( self.news_button:GetText() ) + 25 )
-			self.help_button:SetText( loc["help_button_txt"] or "..." )
-			self.shop_button:SetText( loc["shop_button_txt"] or "..." )
-			self.shop_button:SetToolTip( loc["shop_button_tooltip_txt"] or "..." )
-			self.tp_button:SetText( loc["tp_button_txt"] or "..." )
-			self.tp_button:SetToolTip( loc["tp_button_tooltip_txt"] or "..." )
-			self.clans_button:SetText( loc["clans_button_txt"] or "..." )
-			self.clans_button:SetToolTip( loc["clans_button_tooltip_txt"] or "..." )
-			self.pm_button:SetText( loc["pm_button_txt"] or "..." )
-			self.pm_button:SetToolTip( loc["pm_button_tooltip_txt"] or "..." )
-			self.sett_button:SetText( loc["sett_button_txt"] or "..." )
-			self.sett_button:SetToolTip( loc["sett_button_tooltip_txt"] or "..." )
-			self.tasks_button:SetToolTip( loc["tasks_button_tooltip_txt"] or "..." )
-			self.tasks_button:SetText( loc["tasks_button_txt"] or "..." )
-			self.minigames_button:SetText( loc["minigames_button_txt"] )
-			self.minigames_button:SetToolTip( loc["minigames_button_tooltip_txt"] or "..." )
-			self.abilities_button:SetText( loc["abilities_button_txt"] or "..." )
-			self.abilities_button:SetToolTip( loc["abilities_button_tooltip_txt"] or "..." )
-			self.passive:SetText( loc["passive_txt"] or "..." )
-			self.passive:SizeToContents()
-			self.jesusmode:SetText( loc["jesusmode_txt"] or "..." )
-			self.jesusmode:SizeToContents()
-			self.hideme:SetText( loc["hideme_txt2"] or "..." )
-			self.hideme:SizeToContents()
-			self.pigeonmod:SetText( loc["pigeonmod_txt2"] or "..." )
-			self.pigeonmod:SizeToContents()
-			self.bonus:SetText( loc["bonus_txt"] or "..." )
-			self.bonus:SizeToContents()
-			self.bonus_btn:SetText( loc["bonus_btn_txt"] or "..." )
-			self.bonus_btn:SetSize( Vector2( Render:GetTextWidth( self.bonus_btn:GetText(), 15 ), Render:GetTextHeight( self.bonus:GetText() ) + 15 ) )
-			self.rightlabel:SetWidth( Render:GetTextWidth( self.bonus_btn:GetText(), 15 ) + 50 )
-			self.report_btn:SetText( loc["report_btn_txt"] or "..." )
-			self.report_btn:SetSize( Vector2( 0, Render:GetTextHeight( self.report_btn:GetText(), 14 ) + 10 ) )
-			self.report_btn:SetMargin( Vector2( Render:GetTextWidth( self.report_btn:GetText(), 14 ), 5 ), Vector2( 0, 0 ) )
-		end
-	end )
+	if self.window then
+		self.window:SetTitle( self.loc.servermenutitle_txt )
+		self.news_button:SetText( self.loc.news_button_txt )
+		self.news_button:SetWidth( Render:GetTextWidth( self.news_button:GetText() ) + 25 )
+		self.help_button:SetText( self.loc.help_button_txt )
+		self.shop_button:SetText( self.loc.shop_button_txt )
+		self.shop_button:SetToolTip( self.loc.shop_button_tooltip_txt )
+		self.tp_button:SetText( self.loc.tp_button_txt )
+		self.tp_button:SetToolTip( self.loc.tp_button_tooltip_txt )
+		self.clans_button:SetText( self.loc.clans_button_txt )
+		self.clans_button:SetToolTip( self.loc.clans_button_tooltip_txt )
+		self.pm_button:SetText( self.loc.pm_button_txt )
+		self.pm_button:SetToolTip( self.loc.pm_button_tooltip_txt )
+		self.sett_button:SetText( self.loc.sett_button_txt )
+		self.sett_button:SetToolTip( self.loc.sett_button_tooltip_txt )
+		self.tasks_button:SetToolTip( self.loc.tasks_button_tooltip_txt )
+		self.tasks_button:SetText( self.loc.tasks_button_txt )
+		self.minigames_button:SetText( self.loc.minigames_button_txt )
+		self.minigames_button:SetToolTip( self.loc.minigames_button_tooltip_txt )
+		self.abilities_button:SetText( self.loc.abilities_button_txt )
+		self.abilities_button:SetToolTip( self.loc.abilities_button_tooltip_txt )
+		self.passive:SetText( self.loc.passive_txt )
+		self.passive:SizeToContents()
+		self.jesusmode:SetText( self.loc.jesusmode_txt )
+		self.jesusmode:SizeToContents()
+		self.hideme:SetText( self.loc.hideme_txt2 )
+		self.hideme:SizeToContents()
+		self.pigeonmod:SetText( self.loc.pigeonmod_txt2 )
+		self.pigeonmod:SizeToContents()
+		self.bonus:SetText( self.loc.bonus_txt )
+		self.bonus:SizeToContents()
+		self.bonus_btn:SetText( self.loc.bonus_btn_txt )
+		self.bonus_btn:SetSize( Vector2( Render:GetTextWidth( self.bonus_btn:GetText(), 15 ), Render:GetTextHeight( self.bonus:GetText() ) + 15 ) )
+		self.rightlabel:SetWidth( Render:GetTextWidth( self.bonus_btn:GetText(), 15 ) + 50 )
+		self.report_btn:SetText( self.loc.report_btn_txt )
+		self.report_btn:SetSize( Vector2( 0, Render:GetTextHeight( self.report_btn:GetText(), 14 ) + 10 ) )
+		self.report_btn:SetMargin( Vector2( Render:GetTextWidth( self.report_btn:GetText(), 14 ), 5 ), Vector2( 0, 0 ) )
+	end
 end
 
 function ServerMenu:LoadCategories()
@@ -372,7 +360,7 @@ function ServerMenu:Render()
     local hh, timedec = math.modf( gettime )
     local mm, _ = math.modf( 59 * timedec )
 
-	self.gametime:SetText( self.gametime_txt .. " " .. string.format("%d:%02d", hh, mm) )
+	self.gametime:SetText( self.loc.gametime_txt .. " " .. string.format("%d:%02d", hh, mm) )
 
 	if self.window:GetVisible() ~= is_visible then
 		self.window:SetVisible( is_visible )
@@ -421,13 +409,13 @@ function ServerMenu:SetWindowVisible( visible )
 			self.pigeonmod_btn:SetVisible( false )	
 		end
 
-		self.level:SetText( self.balance_txt .. " $" .. formatNumber( LocalPlayer:GetMoney() ) )
+		self.level:SetText( self.loc.balance_txt .. " $" .. formatNumber( LocalPlayer:GetMoney() ) )
 
-		self.passiveon_btn:SetText( LocalPlayer:GetValue( "Passive" ) and self.disable_txt or self.enable_txt )
-		self.jesusmode_btn:SetText( LocalPlayer:GetValue( "WaterWalk" ) and self.disable_txt or self.enable_txt )
-		self.hideme_btn:SetText( LocalPlayer:GetValue( "HideMe" ) and self.disable_txt or self.enable_txt )
-		self.pigeonmod_btn:SetText( LocalPlayer:GetValue( "PigeonMod" ) and self.disable_txt or self.enable_txt )
-		self.bonus_btn:SetText( LocalPlayer:GetValue( "MoneyBonus" ) and self.moneybonus_txt or self.moneybonusnotavailable_txt )
+		self.passiveon_btn:SetText( LocalPlayer:GetValue( "Passive" ) and self.loc.disable_txt or self.loc.enable_txt )
+		self.jesusmode_btn:SetText( LocalPlayer:GetValue( "WaterWalk" ) and self.loc.disable_txt or self.loc.enable_txt )
+		self.hideme_btn:SetText( LocalPlayer:GetValue( "HideMe" ) and self.loc.disable_txt or self.loc.enable_txt )
+		self.pigeonmod_btn:SetText( LocalPlayer:GetValue( "PigeonMod" ) and self.loc.disable_txt or self.loc.enable_txt )
+		self.bonus_btn:SetText( LocalPlayer:GetValue( "MoneyBonus" ) and self.loc.moneybonus_txt or self.loc.moneybonusnotavailable_txt  )
 
 		if LocalPlayer:GetWorld() == DefaultWorld then
 			self.shop_button:SetEnabled( true )
@@ -574,7 +562,7 @@ end
 function ServerMenu:CastHideMe()
 	self:SetWindowVisible( not self.active )
 	Network:Send( "ToggleHideMe" )
-	Events:Fire( "CastCenterText", { text = self.hideme_txt .. " " .. ( LocalPlayer:GetValue( "HideMe" ) and self.disabled_txt or self.enabled_txt ), time = 2, color = Color.White } )
+	Events:Fire( "CastCenterText", { text = self.loc.hideme_txt .. " " .. ( LocalPlayer:GetValue( "HideMe" ) and self.loc.disabled_txt or self.loc.enabled_txt ), time = 2, color = Color.White } )
 
 	if self.RenderEvent then
 		Events:Unsubscribe( self.RenderEvent )
@@ -586,7 +574,7 @@ function ServerMenu:CastPigeonMod()
 	self:SetWindowVisible( not self.active )
 
 	LocalPlayer:SetValue( "PigeonMod", not LocalPlayer:GetValue( "PigeonMod" ) )
-	Events:Fire( "CastCenterText", { text = self.pigeonmod_txt .. " " .. ( LocalPlayer:GetValue( "PigeonMod" ) and self.enable_txt_2 or self.disable_txt_2 ), time = 2, color = Color.White } )
+	Events:Fire( "CastCenterText", { text = self.loc.pigeonmod_txt .. " " .. ( LocalPlayer:GetValue( "PigeonMod" ) and self.loc.enable_txt_2 or self.loc.disable_txt_2 ), time = 2, color = Color.White } )
 
 	local bs = LocalPlayer:GetBaseState()
 
@@ -626,7 +614,7 @@ end
 function ServerMenu:Bonus()
 	if LocalPlayer:GetValue( "MoneyBonus" ) then
 		self.bonus_btn:SetEnabled( true )
-		Chat:Print( self.bonustag_txt .. " ", Color.White, self.moneybonusavailable_txt, Color.GreenYellow )
+		Chat:Print( self.loc.bonustag_txt .. " ", Color.White, self.loc.moneybonusavailable_txt, Color.GreenYellow )
 	end
 end
 
@@ -635,7 +623,7 @@ function ServerMenu:UpdateMoneyString( money )
         money = LocalPlayer:GetMoney()
     end
 
-	self.level:SetText( self.balance_txt .. " $" .. formatNumber( money ) )
+	self.level:SetText( self.loc.balance_txt .. " $" .. formatNumber( money ) )
 end
 
 function ServerMenu:LocalPlayerMoneyChange( args )

@@ -22,15 +22,6 @@ function Boost:__init()
 	self.windowOpen   = false
 	self.delta        = 0
 
-	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "EN" then
-		self:Lang()
-	else
-		self.name = "Нажмите "
-		self.nameTw = "или LB "
-		self.nameTh = "для супер-ускорения. "
-		self.nameFo = "Нажмите F для мгновенной заморозки."
-	end
-
 	self.boats = {
 		[5] = true, [6] = true, [16] = true, [19] = true,
 		[25] = true, [27] = true, [28] = true, [38] = true,
@@ -53,16 +44,15 @@ function Boost:__init()
 		self.LocalPlayerInputEvent = Events:Subscribe( "LocalPlayerInput", self, self.LocalPlayerInput )
 	end
 
+	self:Lang()
+
 	Events:Subscribe( "Lang", self, self.Lang )
 	Events:Subscribe( "LocalPlayerEnterVehicle", self, self.LocalPlayerEnterVehicle )
 	Events:Subscribe( "LocalPlayerExitVehicle", self, self.LocalPlayerExitVehicle )
 end
 
 function Boost:Lang()
-	self.name = "Press "
-	self.nameTw = "or LB "
-	self.nameTh = "to boost. "
-	self.nameFo = "Press F to brake."
+	self.loc = _G[LocalPlayer:GetValue( "Lang" )] or EN
 end
 
 function Boost:UpdateSettings( settings )
@@ -176,18 +166,18 @@ function Boost:Render( args )
 		Render:SetFont( AssetLocation.SystemFont, "Impact" )
 	end
 	if self.textEnabled and (land or boat or heli or plane) then
-		local text = self.name
+		local text = self.loc.name
 		if land or boat then
 			text = text .. "Shift "
 		elseif heli or plane then
 			text = text .. "Q "
 		end
 		if self.padEnabled then
-			text = text .. self.nameTw
+			text = text .. self.loc.nameTw
 		end
-		text = text .. self.nameTh
+		text = text .. self.loc.nameTh
 		if self.brake then
-			text = text .. self.nameFo
+			text = text .. self.loc.nameFo
 		end
 
 		local size = Render:GetTextSize( text, 15 )

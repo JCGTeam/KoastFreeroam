@@ -45,14 +45,6 @@ function PDA:__init()
 	self.mouseDown         = false
 	self.dragging          = false
 	self.lastMousePosition = Mouse:GetPosition()
-	
-	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "EN" then
-		self:Lang()
-	else
-		MTSetWp = "[СКМ] / [1] - поставить точку назначения"
-		MTPToggle = "[ПКМ] - показать/скрыть имена игроков"
-		MTExtract = "[R] - запросить перемещение"
-	end
 
 	labels = 0
 
@@ -60,15 +52,15 @@ function PDA:__init()
 		self.KeyUpEvent = Events:Subscribe( "KeyUp", self, self.KeyUp )
 	end
 
-	Events:Subscribe( "Lang", self, self.Lang )
+	self:Lang()
+
+    Events:Subscribe( "Lang", self, self.Lang )
 
 	Network:Subscribe( "WarpDoPoof", self, self.WarpDoPoof )
 end
 
 function PDA:Lang()
-	MTSetWp = "[Middle Click] / [1] - Set Waypoint"
-	MTPToggle = "[Right Click] - Show/Hide players names"
-	MTExtract = "[R] - Request Travel"
+	self.loc = _G[LocalPlayer:GetValue( "Lang" )] or EN
 end
 
 function PDA:PlayerUpdate( args )

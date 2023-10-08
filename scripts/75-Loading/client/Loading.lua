@@ -6,15 +6,9 @@ function Load:__init()
 	self.BackgroundImage = Image.Create( AssetLocation.Resource, tostring( math.random( 0, self.maximages ) ) )
 	self.LoadingCircle_Outer = Image.Create( AssetLocation.Game, "fe_initial_load_icon_dif.dds" )
 
-	Network:Subscribe( "LoadLocalizationData", function( language )
-		local loc = language
+	self:Lang()
 
-		self.tip_txt = loc["tip_txt"] or "..."
-		self.warningtitle_txt = loc["warningtitle_txt"] or "..."
-		self.warningdescription_txt = loc["warningdescription_txt"] or "..."
-		self.warningbtn_txt = loc["warningbtn_txt"] or "..."
-	end )
-
+	Events:Subscribe( "Lang", self, self.Lang )
 	Events:Subscribe( "ModuleLoad", self, self.ModuleLoad )
 	Events:Subscribe( "GameLoad", self, self.GameLoad )
 	Events:Subscribe( "LocalPlayerDeath", self, self.LocalPlayerDeath )
@@ -23,6 +17,10 @@ function Load:__init()
 	self.IsJoining = false
 
 	self.border_width = Vector2( Render.Width, 25 )
+end
+
+function Load:Lang()
+	self.loc = _G[LocalPlayer:GetValue( "Lang" )] or EN
 end
 
 function Load:ModuleLoad()
@@ -50,7 +48,7 @@ end
 
 function Load:PostRender()
 	if Game:GetState() == GUIState.Loading then
-		local tip_txt = self.tip_txt or "..."
+		local tip_txt = self.loc.tip_txt
 		local TxtSizePos = Render.Size.x / 0.55 / Render:GetTextWidth( "BTextResoliton" )
 		local TxtSize = Render:GetTextSize( tip_txt, TxtSizePos )
 		local CircleSize = Vector2( 70, 70 )
@@ -58,7 +56,6 @@ function Load:PostRender()
 		local TxtPos = Vector2( ( Render.Size.x/2 ) - ( TxtSize.x/2 ), Render.Size.y / 1.100 )
 		local Rotation = self:GetRotation()
 		local Pos = Vector2( 40, Render.Size.y / 1.075 )
-		local PosTw = Vector2( 40.5, Render.Size.y / 1.074 )
 		local PosTh = Vector2( (Render.Width - 60), 60 )
 
 		self.BackgroundImage:SetPosition( Vector2.Zero )
@@ -100,19 +97,19 @@ function Load:ExitWindow()
 	self.window:SetMinimumSize( Vector2( 500, 200 ) )
 	self.window:SetPositionRel( Vector2( 0.7, 0.5 ) - self.window:GetSizeRel()/2 )
 	self.window:SetVisible( true )
-	self.window:SetTitle( self.warningtitle_txt or "..." )
+	self.window:SetTitle( self.loc.warningtitle_txt )
 	self.window:Subscribe( "WindowClosed", self, self.WindowClosed )
 
 	self.errorText = Label.Create( self.window )
 	self.errorText:SetPosition( Vector2( 20, 30 ) )
 	self.errorText:SetSize( Vector2( 450, 100 ) )
-	self.errorText:SetText( self.warningdescription_txt or "..." )
+	self.errorText:SetText( self.loc.warningdescription_txt )
 	self.errorText:SetTextSize( 20 )
 
 	self.leaveButton = Button.Create( self.window )
 	self.leaveButton:SetSize( Vector2( 100, 40 ) )
 	self.leaveButton:SetDock( GwenPosition.Bottom )
-	self.leaveButton:SetText( self.warningbtn_txt or "..."  )
+	self.leaveButton:SetText( self.loc.warningbtn_txt  )
 	self.leaveButton:Subscribe( "Press", self, self.Exit )
 end
 

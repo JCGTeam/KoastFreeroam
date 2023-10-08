@@ -641,19 +641,19 @@ function Map:Draw()
 		local height = Render:GetTextHeight("A") * 2.5
 		tips_pos.y = tips_pos.y + height
 
-		Render:DrawText( tips_pos, MTSetWp, Color.Black, 15 )
-		Render:DrawText( tips_pos - Vector2.One, MTSetWp, Color.White, 15 )
+		Render:DrawText( tips_pos, PDA.loc.MTSetWp, Color.Black, 15 )
+		Render:DrawText( tips_pos - Vector2.One, PDA.loc.MTSetWp, Color.White, 15 )
 
 		height = Render:GetTextHeight("A") * 1.1
 		tips_pos.y = tips_pos.y + height
 
-		Render:DrawText( tips_pos, MTPToggle, Color.Black, 15 )
-		Render:DrawText( tips_pos - Vector2.One, MTPToggle, Color.White, 15 )
+		Render:DrawText( tips_pos, PDA.loc.MTPToggle, Color.Black, 15 )
+		Render:DrawText( tips_pos - Vector2.One, PDA.loc.MTPToggle, Color.White, 15 )
 
 		tips_pos.y = tips_pos.y + height
 
-		Render:DrawText( tips_pos, MTExtract, Color.Black, 15 )
-		Render:DrawText( tips_pos - Vector2.One, MTExtract, Color.White, 15 )
+		Render:DrawText( tips_pos, PDA.loc.MTExtract, Color.Black, 15 )
+		Render:DrawText( tips_pos - Vector2.One, PDA.loc.MTExtract, Color.White, 15 )
 	end
 
 	if extraction_timer then

@@ -1,0 +1,3 @@
+EN = {
+    tip_txt = "Chat: T  I Server Menu: B I Actions Menu: V"
+}

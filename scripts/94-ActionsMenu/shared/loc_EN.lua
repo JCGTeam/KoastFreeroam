@@ -1,0 +1,21 @@
+EN = {
+    title_txt = "▧ Actions Menu",
+    healme_txt = "Heal yourself",
+    killme_txt = "Kill yourself",
+    clearinv_txt = "Clear inventory",
+    sendmoney_txt = "Send money",
+    bloozing_txt = "Drink",
+    seat_txt = "Sit",
+    lezat_txt = "Lie",
+	vehicleboom_txt = "Blow up a vehicle",
+	vehiclerepair_txt = "Repair a vehicle (Not visually)",
+	sky_txt = "Take to the sky",
+	down_txt = "Going down",
+	pvpblock = "You cannot use this during combat!",
+	novehicle = "You must be behind the driver's seat!",
+	noVipText = "Required VIP status :(",
+	heal_txt = "++ Healing ++",
+	healnotneeded_txt = "Healing is not required",
+	ltext1 = "Player:",
+	ltext2 = "Vehicle:"
+}
