@@ -242,6 +242,7 @@ end
 function Pigeon:Activate( args )
 	if Game:GetState() ~= GUIState.Game then return end
 	if LocalPlayer:GetWorld() ~= DefaultWorld then return end
+
 	if self.activ then
 		if args.key == VirtualKey.Control and self.subs.camera and not self.timers.camera_start and not self.timers.camera_stop then
 			if not self.timers.activate or self.timers.activate:GetMilliseconds() > 300 then
@@ -398,7 +399,7 @@ function Pigeon:SetVelocity()
 
 	ExtRender:DrawShadowedText( screen_pos, hud_str, self.BoostColor, Color( 0, 0, 0, 100 ), TextSize.Large )
 
-	text = self.name
+	local text = self.name
 	Render:SetFont( AssetLocation.SystemFont, "Impact" )
 	local size = Render:GetTextSize(text, 15)
 	local pos = Vector2( ( Render.Width - size.x ) / 2, Render.Height - size.y - 10 )
