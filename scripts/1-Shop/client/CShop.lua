@@ -47,7 +47,6 @@ function Shop:__init()
 	self.window:SetSizeRel( Vector2( 0.5, 0.63 ) )
 	self.window:SetPositionRel( Vector2( 0.7, 0.5 ) - self.window:GetSizeRel()/2 )
 	self.window:SetVisible( self.active )
-	self.window:SetTitle( "▧ Чёрный рынок" )
 	self.window:Subscribe( "WindowClosed", self, self.Close )
 
 	self.tab_control = TabControl.Create( self.window )
@@ -64,24 +63,12 @@ function Shop:__init()
 
 	self.buy_button = Button.Create( base1 )
 	self.buy_button:SetWidthAutoRel( 0.5 )
-	self.buy_button:SetText( "Взять" )
 	self.buy_button:SetTextHoveredColor( Color.LightBlue )
 	self.buy_button:SetTextPressedColor( Color.LightBlue )
 	self.buy_button:SetTextSize( 15 )
 	self.buy_button:SetSize( Vector2( 0, 30 ) )
 	self.buy_button:SetDock( GwenPosition.Bottom )
 	self.buy_button:Subscribe( "Press", self, self.Buy )
-
-	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "EN" then
-		self:Lang()
-	else
-		self.nameBM = "Вы заказали: "
-		self.noVipText = "У вас отсувствует VIP-статус :("
-		self.pvpblock = "Вы не можете использовать это во время боя!"
-		self.dlcwarning_txt = "ВНИМАНИЕ! DLC-контент не сможет наносить урон и не будет виден игрокам, которые его не имеют."
-		self.w = "Пожалуйста, подождите "
-		self.ws = " секунд."
-	end
 
 	self.categories = {}
 
@@ -110,6 +97,8 @@ function Shop:__init()
 	player_rightfoot = {}
 	player_leftfoot = {}
 
+	self:Lang()
+
 	Events:Subscribe( "Lang", self, self.Lang )
 	Events:Subscribe( "Render", self, self.Render )
 	Events:Subscribe( "OpenShop", self, self.OpenShop )
@@ -132,21 +121,16 @@ function Shop:__init()
 	Network:Subscribe( "BuyMenuSavedColor", self, self.SavedColor )
 end
 
-function Shop:Lang( args )
+function Shop:Lang()
+	self.loc = _G[LocalPlayer:GetValue( "Lang" )] or EN
+
 	if self.window then
-		self.window:SetTitle( "▧ Black Market" )
+		self.window:SetTitle( self.loc.title_txt )
 	end
 
 	if self.buy_button then
-		self.buy_button:SetText( "Get" )
+		self.buy_button:SetText( self.loc.get_txt )
 	end
-
-	self.nameBM = "You ordered: "
-	self.noVipText = "Needed VIP status not found."
-	self.pvpblock = "You cannot use this during combat!"
-	self.dlcwarning_txt = "WARNING: DLC content will not be able to deal damage and will not be visible to players who do not have it."
-	self.w = "Please, wait "
-	self.ws = " seconds."
 end
 
 function Shop:RenderAppearanceHat()
@@ -692,7 +676,7 @@ function Shop:CreateSubCategory( category, subcategory_name )
 	if LocalPlayer:GetValue( "DLCWarning" ) then
 		if subcategory_name == "DLC" or subcategory_name == "Правая рука" or subcategory_name == "Левая рука" or subcategory_name == "Основное" then
 			local dlc_warning = Label.Create( t.window )
-			dlc_warning:SetText( self.dlcwarning_txt )
+			dlc_warning:SetText( self.loc.dlcwarning_txt )
 			dlc_warning:SetTextColor( Color( 200, 200, 200 ) )
 			dlc_warning:SetDock( GwenPosition.Top )
 			dlc_warning:SetMargin( Vector2( 5, 5 ), Vector2( 5, 5 ) )
@@ -999,12 +983,12 @@ function Shop:Buy( args )
 		self:Close()
 		if self.types[category_name] == 1 then
 			if LocalPlayer:GetValue( "PVPMode" ) then
-				Events:Fire( "CastCenterText", { text = self.pvpblock, time = 6, color = Color.Red } )
+				Events:Fire( "CastCenterText", { text = self.loc.pvpblock, time = 6, color = Color.Red } )
 				return
 			end
 
 			if time < self.cooltime then
-				Events:Fire( "CastCenterText", { text = self.w .. math.ceil( self.cooltime - time ) .. self.ws, time = 6, color = Color.Red } )
+				Events:Fire( "CastCenterText", { text = self.loc.w .. math.ceil( self.cooltime - time ) .. self.loc.ws, time = 6, color = Color.Red } )
 				return false
 			end
 			self.cooltime = time + self.cooldown
@@ -1032,11 +1016,11 @@ function Shop:Close( args )
 end
 
 function Shop:Text( message )
-	Events:Fire( "CastCenterText", { text = self.nameBM .. message, time = 6, color = Color.Gold } )
+	Events:Fire( "CastCenterText", { text = self.loc.nameBM .. message, time = 6, color = Color.Gold } )
 end
 
 function Shop:NoVipText()
-	Events:Fire( "CastCenterText", { text = self.noVipText, time = 3, color = Color.Red } )
+	Events:Fire( "CastCenterText", { text = self.loc.noVipText, time = 3, color = Color.Red } )
 end
 
 function Shop:Parachute( message )

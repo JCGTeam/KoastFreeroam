@@ -2,6 +2,9 @@ class "Drift"
 
 function Drift:__init()
 	self.textSize = 36
+
+	self:Lang()
+
 	Events:Subscribe( "Lang", self, self.Lang )
 	Events:Subscribe( "Render", self, self.Render )
 	Events:Subscribe( "PlayerQuit", self, self.PlayerQuit )
@@ -13,38 +16,10 @@ function Drift:__init()
 	Network:Subscribe( "03", self, self.onDriftAttempt )
 
 	self.showTimer = Timer()
-
-	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "EN" then
-		self:Lang()
-	else
-		self.tWidg = "Хорошечный Дрифтер:"
-		self.tWidgTw = "Хорошечный "
-		self.tDrift = "Дрифтер: "
-		self.tDriftTw = "Дрифт: "
-		self.tDrift3 = "Продолжай! "
-		self.tDrift4 = "Малаца! "
-		self.tDrift5 = "Отличный дрифт! "
-		self.tDrift6 = "Грациозно! "
-		self.tDrift7 = "Мастер! "
-		self.tDrift8 = "Бог дрифта! "
-		self.tDrift9 = "АСТАНАВИСЬ!!! "
-		self.tRecord = "Личный дрифт рекорд: "
-	end
 end
 
 function Drift:Lang()
-	self.tWidg = "Fantastic Drift:"
-	self.tWidgTw = "Fantastic "
-	self.tDrift = "Drift: "
-	self.tDriftTw = "Drift: "
-	self.tDrift3 = "Well done! "
-	self.tDrift4 = "Do not stop! "
-	self.tDrift5 = "Great drift! "
-	self.tDrift6 = "Gracefully! "
-	self.tDrift7 = "Drift Master! "
-	self.tDrift8 = "Lord of drift! "
-	self.tDrift9 = "STOP PLS!!! "
-	self.tRecord = "Personal drift record: "
+	self.loc = _G[LocalPlayer:GetValue( "Lang" )] or EN
 end
 
 --[[function Drift:LocalPlayerExitVehicle()
@@ -86,10 +61,10 @@ function Drift:Render()
 		if Game:GetSetting(4) >= 1 then
 			if object and LocalPlayer:GetValue("GetWidget") == 2 then
 				local record = object:GetValue("S")
-				local text = self.tWidg
+				local text = self.loc.tWidg
 				local position = Vector2( 20, Render.Height * 0.4 )
 				ExtRender:DrawShadowedText( position, text, Color( 255, 255, 255, Game:GetSetting(4) * 2.25 ), Color( 25, 25, 25, Game:GetSetting(4) * 2.25 ), 15 )
-				Render:DrawText( position + Vector2( Render:GetTextWidth( self.tWidgTw, 15 ), 0 ), self.tDrift, Color( 255, 165, 0, Game:GetSetting(4) * 2.25 ), 15 )
+				Render:DrawText( position + Vector2( Render:GetTextWidth( self.loc.tWidgTw, 15 ), 0 ), self.loc.tDrift, Color( 255, 165, 0, Game:GetSetting(4) * 2.25 ), 15 )
 
 				local bar_pos = position
 
@@ -160,8 +135,8 @@ function Drift:Render()
 		self.slide = self.slide + (1 * self.multipler)
 		self.anim_tick = self.anim_tick + 1
 		self.sscore = self.score
-		local btext = self.tDriftTw
-		local text = self.tDriftTw .. tostring( math.ceil(self.score*self.multipler) )
+		local btext = self.loc.tDriftTw
+		local text = self.loc.tDriftTw .. tostring( math.ceil(self.score*self.multipler) )
 		local text_mult = "x" .. tostring( self.multipler )
 
 		if self.anim_tick < 30 then
@@ -171,32 +146,32 @@ function Drift:Render()
 		end
 
 		if math.ceil(self.score * self.multipler) > 5000 then
-			btext = self.tDrift3
-			text = self.tDrift3 .. math.ceil(self.score*self.multipler)
+			btext = self.loc.tDrift3
+			text = self.loc.tDrift3 .. math.ceil(self.score*self.multipler)
 		end
 		if math.ceil(self.score * self.multipler) > 10000 then
-			btext = self.tDrift4
-			text = self.tDrift4 .. math.ceil(self.score*self.multipler)
+			btext = self.loc.tDrift4
+			text = self.loc.tDrift4 .. math.ceil(self.score*self.multipler)
 		end
 		if math.ceil(self.score * self.multipler) > 50000 then
-			btext = self.tDrift5
-			text = self.tDrift5 .. math.ceil(self.score*self.multipler)
+			btext = self.loc.tDrift5
+			text = self.loc.tDrift5 .. math.ceil(self.score*self.multipler)
 		end
 		if math.ceil(self.score * self.multipler) > 100000 then
-			btext = self.tDrift6
-			text = self.tDrift6 .. math.ceil(self.score*self.multipler)
+			btext = self.loc.tDrift6
+			text = self.loc.tDrift6 .. math.ceil(self.score*self.multipler)
 		end
 		if math.ceil(self.score * self.multipler) > 500000 then
-			btext = self.tDrift7
-			text = self.tDrift7 .. math.ceil(self.score*self.multipler)
+			btext = self.loc.tDrift7
+			text = self.loc.tDrift7 .. math.ceil(self.score*self.multipler)
 		end
 		if math.ceil(self.score * self.multipler) > 1000000 then
-			btext = self.tDrift8
-			text = self.tDrift8 .. math.ceil(self.score*self.multipler)
+			btext = self.loc.tDrift8
+			text = self.loc.tDrift8 .. math.ceil(self.score*self.multipler)
 		end
 		if math.ceil(self.score * self.multipler) > 10000000 then
-			btext = self.tDrift9
-			text = self.tDrift9 .. math.ceil(self.score*self.multipler)
+			btext = self.loc.tDrift9
+			text = self.loc.tDrift9 .. math.ceil(self.score*self.multipler)
 		end
 
 		if LocalPlayer:GetValue( "BestRecordVisible" ) and not LocalPlayer:GetValue( "HiddenHUD" ) and Game:GetState() == GUIState.Game then
@@ -230,7 +205,7 @@ function Drift:Render()
 			if math.ceil(self.score * self.multipler) > (shared:GetValue("Record") or 0) then
 				shared:SetValue( "Record", math.ceil(self.score * self.multipler) )
 				Network:Send( "03", math.ceil(self.score * self.multipler) )
-				Game:ShowPopup( self.tRecord .. math.ceil(self.score * self.multipler), true )
+				Game:ShowPopup( self.loc.tRecord .. math.ceil(self.score * self.multipler), true )
 			end
 			self.slide = nil
 			self.score = nil
@@ -270,8 +245,8 @@ function Drift:Render()
 	self.score = score
 	self.slide = 0
 	self.anim_tick = self.anim_tick + 1
-	local btext = self.tDriftTw
-	local text = self.tDriftTw .. tostring( math.ceil(self.score*self.multipler) )
+	local btext = self.loc.tDriftTw
+	local text = self.loc.tDriftTw .. tostring( math.ceil(self.score*self.multipler) )
 	local text_mult = "x" .. tostring( self.multipler )
 
 	self.angular = vehicle:GetAngularVelocity()
@@ -286,32 +261,32 @@ function Drift:Render()
 		self.multipler = 10
 	end
 	if math.ceil(self.score * self.multipler) > 5000 then
-		btext = self.tDrift3
-		text = self.tDrift3 .. math.ceil(self.score*self.multipler)
+		btext = self.loc.tDrift3
+		text = self.loc.tDrift3 .. math.ceil(self.score*self.multipler)
 	end
 	if math.ceil(self.score * self.multipler) > 10000 then
-		btext = self.tDrift4
-		text = self.tDrift4 .. math.ceil(self.score*self.multipler)
+		btext = self.loc.tDrift4
+		text = self.loc.tDrift4 .. math.ceil(self.score*self.multipler)
 	end
 	if math.ceil(self.score * self.multipler) > 50000 then
-		btext = self.tDrift5
-		text = self.tDrift5 .. math.ceil(self.score*self.multipler)
+		btext = self.loc.tDrift5
+		text = self.loc.tDrift5 .. math.ceil(self.score*self.multipler)
 	end
 	if math.ceil(self.score * self.multipler) > 100000 then
-		btext = self.tDrift6
-		text = self.tDrift6 .. math.ceil(self.score*self.multipler)
+		btext = self.loc.tDrift6
+		text = self.loc.tDrift6 .. math.ceil(self.score*self.multipler)
 	end
 	if math.ceil(self.score * self.multipler) > 500000 then
-		btext = self.tDrift7
-		text = self.tDrift7 .. math.ceil(self.score*self.multipler)
+		btext = self.loc.tDrift7
+		text = self.loc.tDrift7 .. math.ceil(self.score*self.multipler)
 	end
 	if math.ceil(self.score * self.multipler) > 1000000 then
-		btext = self.tDrift8
-		text = self.tDrift8 .. math.ceil(self.score*self.multipler)
+		btext = self.loc.tDrift8
+		text = self.loc.tDrift8 .. math.ceil(self.score*self.multipler)
 	end
 	if math.ceil(self.score * self.multipler) > 10000000 then
-		btext = self.tDrift9
-		text = self.tDrift9 .. math.ceil(self.score*self.multipler)
+		btext = self.loc.tDrift9
+		text = self.loc.tDrift9 .. math.ceil(self.score*self.multipler)
 	end
 
 	if LocalPlayer:GetValue( "BestRecordVisible" ) and not LocalPlayer:GetValue( "HiddenHUD" ) and Game:GetState() == GUIState.Game then

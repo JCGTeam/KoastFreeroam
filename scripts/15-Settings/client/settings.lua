@@ -49,27 +49,7 @@ function Settings:__init()
 	self.aim = true
 
 	self:LoadCategories()
-
-	if LocalPlayer:GetValue( "Lang" ) and LocalPlayer:GetValue( "Lang" ) == "EN" then
-		self:Lang()
-	else
-		self.window:SetTitle( "▧ Настройки" )
-		self.hidetexttip:SetText( "Нажмите F11, чтобы скрыть/показать интерфейс сервера" )
-		self.hidetext:SetText( "Используется скрытие серверного интерфейса" )
-		self.buttonBoost:SetText( "Настройка супер-ускорения (для ТС)" )
-		self.buttonSpeedo:SetText( "Настройка спидометра" )
-		self.buttonSDS:SetText( "Настройка скайдайвинга" )
-		self.buttonTags:SetText( "Настройка тегов" )
-		self.buttonChatSett:SetText( "Настройка чата" )
-		self.texter:SetText( "Сохранения:" )
-		self.buttonSPOff:SetText( "Сбросить сохраненную позицию" )
-
-		self.posreset_txt = "Позиция сброшена. Перезайдите в игру."
-
-		self.hidetext:SizeToContents()
-	end
-
-	Network:Subscribe( "ResetDone", self, self.ResetDone )
+	self:Lang()
 
 	Events:Subscribe( "Lang", self, self.Lang )
 	Events:Subscribe( "LoadUI", self, self.LoadUI )
@@ -79,26 +59,26 @@ function Settings:__init()
 	Events:Subscribe( "CloseSettingsMenu", self, self.CloseSettingsMenu )
 	Events:Subscribe( "KeyUp", self, self.KeyHide )
 
+	Network:Subscribe( "ResetDone", self, self.ResetDone )
+
 	self:GameLoad()
 end
 
 function Settings:Lang()
-	self.window:SetTitle( "▧ Settings" )
-	self.hidetexttip:SetText( "Press F11 to hide/show server UI" )
-	self.hidetext:SetText( "Used server UI hiding" )
+	self.loc = _G[LocalPlayer:GetValue( "Lang" )] or EN
+
+	self.window:SetTitle( self.loc.window_txt )
+	self.hidetexttip:SetText( self.loc.hidetexttip_txt )
+	self.hidetext:SetText( self.loc.hidetext_txt )
 	self.hidetexttip:SizeToContents()
 	self.hidetext:SizeToContents()
-	self.buttonBoost:SetText( "Boost setting (for vehicle)" )
-	self.buttonSpeedo:SetText( "Speedometer setting" )
-	self.buttonSDS:SetText( "Skydiving settings" )
-	self.buttonTags:SetText( "Tags settings" )
-	self.buttonChatSett:SetText( "Chat settings" )
-	self.texter:SetText( "Saves:" )
-	self.buttonSPOff:SetText( "Reset Saved Position" )
-
-	self.posreset_txt = "Position has been reset. Restart the game."
-
-	self.hidetext:SizeToContents()
+	self.buttonBoost:SetText( self.loc.buttonBoost_txt )
+	self.buttonSpeedo:SetText( self.loc.buttonSpeedo_txt )
+	self.buttonSDS:SetText( self.loc.buttonSDS_txt )
+	self.buttonTags:SetText( self.loc.buttonTags_txt )
+	self.buttonChatSett:SetText( self.loc.buttonChatSett_txt )
+	self.texter:SetText( self.loc.texter_txt )
+	self.buttonSPOff:SetText( self.loc.buttonSPOff_txt )
 end
 
 function Settings:LoadUI()
@@ -692,8 +672,9 @@ function Settings:GameRender()
 
 	if self.skyColor then
 		if self.skyRainbow and self.rT then
-			h = ( 0.01 * self.rT:GetMilliseconds() ) * 5
-			color = Color.FromHSV( h % 360, 1, 1 )
+			local h = ( 0.01 * self.rT:GetMilliseconds() ) * 5
+			local color = Color.FromHSV( h % 360, 1, 1 )
+
 			Render:FillArea( Vector2.Zero, Render.Size, color + Color( 0, 0, 0, 100 ) )
 		else
 			Render:FillArea( Vector2.Zero, Render.Size, self.toneS1Picker:GetColor() + Color( 0, 0, 0, 100 ) )
@@ -724,6 +705,7 @@ function Settings:GameRender()
 			else
 				self.SkyImage7 = Image.Create( AssetLocation.Resource, "Anime2" )
 			end
+
 			if self.timer:GetSeconds() >= speed * 2 then
 				self.timer:Restart()
 			end
@@ -831,11 +813,13 @@ end
 
 function Settings:OpenSettingsMenu( args )
 	if Game:GetState() ~= GUIState.Game then return end
+
 	self:Open()
 end
 
 function Settings:CloseSettingsMenu( args )
 	if Game:GetState() ~= GUIState.Game then return end
+
 	if self.window:GetVisible() == true then
 		self:SetWindowVisible( false )
 		if self.LocalPlayerInputEvent then
@@ -870,6 +854,7 @@ end
 
 function Settings:ToggleAim()
 	self.aim = not self.aim
+
 	if self.aim then
 		if self.NoAimRenderEvent then
 			Events:Unsubscribe( self.NoAimRenderEvent )
@@ -902,11 +887,12 @@ end
 
 function Settings:ResetDone()
 	self.buttonSPOff:SetEnabled( false )
-	self.buttonSPOff:SetText( self.posreset_txt )
+	self.buttonSPOff:SetText( self.loc.posreset_txt )
 end
 
 function Settings:KeyHide( args )
 	if Game:GetState() ~= GUIState.Game then return end
+
 	if args.key == VirtualKey.F11 then
 		self.hidetext:SetVisible( not LocalPlayer:GetValue( "HiddenHUD" ) )
 		LocalPlayer:SetValue( "HiddenHUD", not LocalPlayer:GetValue( "HiddenHUD" ) )

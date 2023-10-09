@@ -10,8 +10,7 @@ function FirstPerson:__init()
 	self.bering = { [85] = true }
 	self.aero = { [39] = true }
 
-	self.on = "Вид от 1-го лица включён"
-	self.off = "Вид от 1-го лица отключён"
+	self:Lang()
 
 	Events:Subscribe( "Lang", self, self.Lang )
 	Events:Subscribe( "LocalPlayerExitVehicle", self, self.LocalPlayerExitVehicle )
@@ -20,8 +19,7 @@ function FirstPerson:__init()
 end
 
 function FirstPerson:Lang()
-	self.on = "First-person view enabled"
-	self.off = "First-person view disabled"
+	self.loc = _G[LocalPlayer:GetValue( "Lang" )] or EN
 end
 
 function FirstPerson:LocalPlayerExitVehicle()
@@ -71,7 +69,7 @@ function FirstPerson:Active()
 		Events:Fire( "ZoomReset" )
 	end
 
-	Events:Fire( "CastCenterText", { text = ( self.enabled and self.on or self.off ), time = 2, color = Color( 0, 222, 0 ) } )
+	Events:Fire( "CastCenterText", { text = ( self.enabled and self.loc.on or self.loc.off ), time = 2, color = Color( 0, 222, 0 ) } )
 end
 
 function FirstPerson:KeyUp( args )
