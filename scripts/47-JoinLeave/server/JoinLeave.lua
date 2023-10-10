@@ -20,6 +20,7 @@ function JoinLeave:PlayerJoin( args )
 	args.player:SetNetworkValue( "GameMode", "FREEROAM" )
 	if self.geoip.Query( args.player:GetIP() )["status"] ~= "fail" then
 		args.player:SetNetworkValue( "Country", self.geoip.Query( args.player:GetIP() )["countryCode"] )
+		args.player:SetNetworkValue( "Lang", self.geoip.Query( args.player:GetIP() )["countryCode"] )
 	else
 		args.player:SetNetworkValue( "Country", "N/A" )
 	end
