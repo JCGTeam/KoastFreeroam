@@ -77,6 +77,8 @@ function Menu:Mission( args )
 end
 
 function Menu:GameLoad()
+	Events:Fire( "Lang" )
+
 	if LocalPlayer:GetValue( "Tag" ) == "Creator" then
 		self.status = "  " .. self.loc.owner_txt
 	elseif LocalPlayer:GetValue( "Tag" ) == "GlAdmin" then
@@ -94,8 +96,6 @@ function Menu:GameLoad()
 	elseif LocalPlayer:GetValue( "NT_TagName" ) then
 		self.status = "  " .. "[" .. LocalPlayer:GetValue( "NT_TagName" ) .. "]"
 	end
-
-	Events:Fire( "Lang" )
 
 	if self.GameLoadEvent then
 		Events:Unsubscribe( self.GameLoadEvent )
